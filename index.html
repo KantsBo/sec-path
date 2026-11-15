@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SOC Path">
+<meta name="theme-color" content="#050a1f">
+<title>SOC Path — мой план</title>
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#040817;
+  --text:#eef3ff; --muted:#8c9bc7; --dim:#5d6a94;
+  --b1:#3d7bff; --b2:#6a5cff; --b3:#22d3ff; --b4:#1239c9;
+  --grad:linear-gradient(135deg,#22d3ff 0%,#3d7bff 45%,#7b5cff 100%);
+  --glass:rgba(22,34,78,.42); --stroke:rgba(140,170,255,.14);
+  --r:24px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--text);font-family:Manrope,system-ui,-apple-system,sans-serif}
+body{min-height:100vh;padding:calc(env(safe-area-inset-top) + 16px) 16px calc(env(safe-area-inset-bottom) + 104px);overflow-x:hidden}
+.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:radial-gradient(120% 80% at 50% -10%,#0d1c56 0%,#060b26 45%,#040817 100%)}
+.orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;animation:float 18s ease-in-out infinite}
+.o1{width:340px;height:340px;background:#2d5bff;top:-120px;right:-90px}
+.o2{width:300px;height:300px;background:#6a3cff;top:38%;left:-150px;animation-delay:-6s;opacity:.35}
+.o3{width:260px;height:260px;background:#00b8ff;bottom:-90px;right:-60px;animation-delay:-12s;opacity:.3}
+@keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,30px)}}
+.grain{position:absolute;inset:0;opacity:.05;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:3px 3px}
+
+.wrap{max-width:560px;margin:0 auto}
+svg.i{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+
+header{display:flex;align-items:center;justify-content:space-between;margin:4px 2px 20px}
+.brand{display:flex;align-items:center;gap:13px}
+.logo{width:50px;height:50px;border-radius:16px;display:grid;place-items:center;position:relative;
+  background:linear-gradient(145deg,#1b3cff,#0a1a6e 60%,#071040);
+  box-shadow:0 10px 30px rgba(45,91,255,.45),inset 0 1px 0 rgba(255,255,255,.25),inset 0 -8px 16px rgba(0,0,0,.3)}
+.logo::after{content:"";position:absolute;inset:0;border-radius:16px;padding:1px;background:linear-gradient(160deg,rgba(255,255,255,.5),rgba(255,255,255,0) 50%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.brand h1{font-size:21px;font-weight:800;letter-spacing:-.4px}
+.brand p{font-size:12.5px;color:var(--muted);margin-top:1px}
+.date{font-size:11.5px;color:var(--muted);text-align:right;line-height:1.4}
+
+/* glass card with gradient hairline */
+.card{position:relative;background:var(--glass);backdrop-filter:blur(22px) saturate(140%);-webkit-backdrop-filter:blur(22px) saturate(140%);
+  border-radius:var(--r);padding:20px;margin-bottom:14px;box-shadow:0 20px 40px rgba(0,0,0,.25)}
+.card::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;
+  background:linear-gradient(160deg,rgba(150,180,255,.35),rgba(150,180,255,.06) 40%,rgba(120,90,255,.18));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.h{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:800;margin-bottom:14px;letter-spacing:-.2px}
+.hi{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;color:#cfe0ff;
+  background:linear-gradient(145deg,rgba(61,123,255,.35),rgba(106,92,255,.2));box-shadow:inset 0 1px 0 rgba(255,255,255,.15)}
+.hi svg{width:17px;height:17px}
+.sub{color:var(--muted);font-size:13.5px;line-height:1.6}
+.sub b{color:var(--text)}
+
+/* hero */
+.hero{overflow:hidden;padding:22px;background:linear-gradient(140deg,#1f4dff 0%,#3b2fd6 55%,#1a1a8a 100%);box-shadow:0 24px 60px rgba(40,70,255,.4)}
+.hero::before{background:linear-gradient(160deg,rgba(255,255,255,.55),rgba(255,255,255,.05) 45%,rgba(255,255,255,.15))}
+.hero .m1{position:absolute;width:220px;height:220px;border-radius:50%;right:-70px;top:-80px;background:radial-gradient(circle,#22d3ff,transparent 65%);opacity:.7}
+.hero .m2{position:absolute;width:200px;height:200px;border-radius:50%;left:-60px;bottom:-110px;background:radial-gradient(circle,#a35cff,transparent 65%);opacity:.6}
+.hero .grid{position:absolute;inset:0;opacity:.13;background-image:linear-gradient(rgba(255,255,255,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.6) 1px,transparent 1px);background-size:22px 22px;
+  -webkit-mask:linear-gradient(120deg,transparent 30%,#000 100%);mask:linear-gradient(120deg,transparent 30%,#000 100%)}
+.hero>*{position:relative}
+.tag{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:800;letter-spacing:.9px;text-transform:uppercase;
+  color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);padding:6px 11px;border-radius:99px;backdrop-filter:blur(8px)}
+.tag .dot{width:7px;height:7px;border-radius:50%;background:#5dffcb;box-shadow:0 0 0 0 rgba(93,255,203,.7);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(93,255,203,.6)}70%{box-shadow:0 0 0 9px rgba(93,255,203,0)}100%{box-shadow:0 0 0 0 rgba(93,255,203,0)}}
+.hero h2{font-size:30px;font-weight:800;letter-spacing:-.8px;margin:14px 0 6px;line-height:1.1}
+.hero .what{font-size:14px;color:rgba(235,240,255,.82);line-height:1.55}
+.ring{display:flex;align-items:center;gap:16px;margin-top:18px}
+.ring svg{width:74px;height:74px;flex:none;transform:rotate(-90deg)}
+.ring .num{font-size:30px;font-weight:800;letter-spacing:-1px;line-height:1}
+.ring small{display:block;font-size:12px;color:rgba(235,240,255,.75);margin-top:4px}
+.ring .ctr{position:relative;width:74px;height:74px}
+.ring .ctr span{position:absolute;inset:0;display:grid;place-items:center;font-size:14px;font-weight:800}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat{padding:16px 10px;text-align:center;margin:0}
+.stat b{display:block;font-size:26px;font-weight:800;letter-spacing:-.8px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat span{font-size:11.5px;color:var(--muted);font-weight:600}
+
+.routine{display:grid;gap:9px}
+.ri{display:flex;align-items:center;gap:13px;padding:13px;border-radius:18px;background:rgba(10,18,50,.55);border:1px solid var(--stroke)}
+.ic{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;flex:none;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 6px 16px rgba(0,0,0,.25)}
+.ic svg{width:20px;height:20px}
+.g1{background:linear-gradient(145deg,#3d7bff,#1a3bd1)}
+.g2{background:linear-gradient(145deg,#22d3ff,#1677e6)}
+.g3{background:linear-gradient(145deg,#8b6bff,#4b2fd6)}
+.g4{background:linear-gradient(145deg,#4a5c9c,#26305e)}
+.ri b{font-size:14.5px;display:block;font-weight:700}
+.ri small{font-size:12.5px;color:var(--muted)}
+.ri .t{margin-left:auto;font-size:12px;font-weight:800;color:#9fc2ff;background:rgba(61,123,255,.14);padding:5px 9px;border-radius:99px;white-space:nowrap}
+
+.goal{display:flex;align-items:center;gap:14px}
+.goal b{font-size:16px;display:block}
+.goal small{color:var(--muted);font-size:13px}
+
+/* timeline */
+.tl{position:relative;padding-left:26px}
+.tl::before{content:"";position:absolute;left:10px;top:10px;bottom:10px;width:2px;border-radius:2px;background:linear-gradient(#22d3ff,#3d7bff 40%,#7b5cff 75%,rgba(123,92,255,.1))}
+.st{position:relative;margin-bottom:12px;padding:15px;border-radius:18px;background:rgba(10,18,50,.55);border:1px solid var(--stroke)}
+.st .nb{position:absolute;left:-26px;top:14px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 10.5px "JetBrains Mono",monospace;
+  background:#0c1640;border:1.5px solid #34408a;color:var(--muted)}
+.st.done{opacity:.55}
+.st.done .nb{background:var(--grad);border:0;color:#fff}
+.st.now{background:linear-gradient(140deg,rgba(45,91,255,.28),rgba(106,92,255,.16));border-color:rgba(110,150,255,.55);box-shadow:0 10px 30px rgba(45,91,255,.25)}
+.st.now .nb{background:var(--grad);border:0;color:#fff;box-shadow:0 0 0 5px rgba(61,123,255,.22)}
+.st .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.st .nm{font-weight:800;font-size:15px;letter-spacing:-.2px}
+.st .dt{font-size:11px;color:var(--muted)}
+.st ul{list-style:none;margin-top:9px;display:grid;gap:5px}
+.st li{font-size:13px;color:#c5d1f5;line-height:1.45;padding-left:14px;position:relative}
+.st li::before{content:"";position:absolute;left:2px;top:7px;width:5px;height:5px;border-radius:50%;background:#5b86ff}
+.st .ok{margin-top:10px;font-size:12.5px;color:#8fe3ff;line-height:1.45;display:flex;gap:7px}
+.st .ok svg{width:15px;height:15px;margin-top:1px}
+.pill{font-size:10px;font-weight:800;padding:4px 9px;border-radius:99px;background:var(--grad);color:#fff;text-transform:uppercase;letter-spacing:.7px;box-shadow:0 4px 12px rgba(61,123,255,.4)}
+
+/* plan countdown */
+.ptop{padding:16px;border-radius:20px;margin-bottom:18px;background:linear-gradient(140deg,rgba(34,211,255,.16),rgba(61,123,255,.14) 50%,rgba(123,92,255,.14));border:1px solid rgba(110,170,255,.35)}
+.ptop .big{display:flex;align-items:baseline;gap:8px}
+.ptop .big b{font-size:34px;font-weight:800;letter-spacing:-1px;background:linear-gradient(135deg,#7fe8ff,#fff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ptop .big span{font-size:13px;color:var(--muted);font-weight:600}
+.seg{position:relative;display:flex;gap:3px;height:12px;margin:14px 0 8px}
+.seg i{display:block;height:100%;border-radius:4px;background:rgba(255,255,255,.08);position:relative;overflow:hidden}
+.seg i u{position:absolute;inset:0;width:0;background:var(--grad);border-radius:4px;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.seg .me{position:absolute;top:-5px;bottom:-5px;width:3px;border-radius:3px;background:#fff;box-shadow:0 0 10px #7fe8ff;transform:translateX(-50%)}
+.legend{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);font-weight:600}
+.cd{font-size:11px;font-weight:800;padding:4px 9px;border-radius:99px;white-space:nowrap;letter-spacing:.2px}
+.cd.fut{background:rgba(140,160,220,.12);color:#aebde8}
+.cd.now{background:var(--grad);color:#fff;box-shadow:0 4px 12px rgba(61,123,255,.4)}
+.cd.past{background:rgba(93,255,203,.14);color:#7dffd4}
+.sbar{height:6px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:10px}
+.sbar i{display:block;height:100%;width:0;border-radius:99px;background:var(--grad);transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.smeta{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:5px;font-weight:600}
+
+/* certs */
+.label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);margin:16px 2px 9px;font-weight:800}
+.label:first-of-type{margin-top:2px}
+.cert{display:flex;gap:13px;align-items:center;padding:13px;border-radius:18px;background:rgba(10,18,50,.55);border:1px solid var(--stroke);margin-bottom:9px}
+.medal{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;flex:none;font:800 15px "JetBrains Mono",monospace;color:#fff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.4),inset 0 -6px 12px rgba(0,0,0,.2),0 8px 18px rgba(0,0,0,.3)}
+.gold{background:linear-gradient(145deg,#ffe28a,#e0a325 55%,#a8701a);color:#3a2504}
+.silver{background:linear-gradient(145deg,#f4f7ff,#aab6d4 55%,#6f7c9e);color:#1d2540}
+.bronze{background:linear-gradient(145deg,#ffc79a,#c9783f 55%,#8a4a22);color:#2e1405}
+.blue{background:linear-gradient(145deg,#5aa0ff,#2a55e0)}
+.violet{background:linear-gradient(145deg,#a58bff,#5a3ae0)}
+.cert b{font-size:15px;font-weight:800}
+.cert small{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
+.cert .when{margin-left:auto;font-size:11.5px;font-weight:800;color:#9fc2ff;white-space:nowrap}
+.no{display:flex;flex-wrap:wrap;gap:7px}
+.no span{font-size:12px;font-weight:700;color:var(--muted);padding:6px 11px;border-radius:99px;border:1px dashed rgba(140,160,220,.3);text-decoration:line-through;text-decoration-color:rgba(140,160,220,.5)}
+.li{display:flex;gap:10px;font-size:13.5px;line-height:1.55;color:#c5d1f5;margin-bottom:9px}
+.li svg{width:16px;height:16px;margin-top:3px;color:#5b9dff}
+
+/* course */
+.blk{display:flex;gap:13px;align-items:center;padding:13px;border-radius:18px;background:rgba(10,18,50,.55);border:1px solid var(--stroke);margin-bottom:9px}
+.blk .n{font:700 13px "JetBrains Mono",monospace;color:#fff;width:42px;height:42px;border-radius:13px;display:grid;place-items:center;flex:none;background:linear-gradient(145deg,#2a3f9e,#18225e);box-shadow:inset 0 1px 0 rgba(255,255,255,.15)}
+.blk b{font-size:14.5px;font-weight:700}
+.blk small{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
+.blk.today{background:linear-gradient(140deg,rgba(34,211,255,.18),rgba(61,123,255,.14));border-color:rgba(34,211,255,.5)}
+.blk.today .n{background:linear-gradient(145deg,#22d3ff,#3d7bff)}
+.link{display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:11px 15px;border-radius:14px;background:var(--grad);color:#fff;font-weight:800;font-size:13.5px;text-decoration:none;box-shadow:0 8px 20px rgba(61,123,255,.35)}
+.link svg{width:16px;height:16px}
+
+/* course progress */
+.cprog{display:flex;align-items:center;gap:16px;padding:16px;border-radius:20px;margin-bottom:14px;
+  background:linear-gradient(140deg,rgba(34,211,255,.16),rgba(61,123,255,.14) 50%,rgba(123,92,255,.14));border:1px solid rgba(110,170,255,.35)}
+.cprog .ctr{position:relative;width:70px;height:70px;flex:none}
+.cprog .ctr svg{width:70px;height:70px;transform:rotate(-90deg)}
+.cprog .ctr span{position:absolute;inset:0;display:grid;place-items:center;font:800 15px Manrope,sans-serif}
+.cprog b{font-size:20px;font-weight:800;letter-spacing:-.4px;display:block}
+.cprog small{display:block;font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.45}
+.pace{display:inline-block;margin-top:7px;font-size:11px;font-weight:800;padding:4px 9px;border-radius:99px;letter-spacing:.3px}
+.pace.ok{background:rgba(93,255,203,.14);color:#7dffd4}
+.pace.ahead{background:rgba(34,211,255,.16);color:#8fe3ff}
+.pace.behind{background:rgba(255,170,90,.14);color:#ffc08a}
+.blk{flex-wrap:wrap;cursor:pointer;user-select:none}
+.blk .mid{flex:1;min-width:0}
+.blk .mini{height:5px;border-radius:99px;background:rgba(255,255,255,.08);margin-top:8px;overflow:hidden}
+.blk .mini i{display:block;height:100%;border-radius:99px;background:var(--grad);transition:width .4s}
+.blk .cnt{font:700 12px "JetBrains Mono",monospace;color:#9fc2ff;flex:none}
+.blk .chev{width:16px;height:16px;color:var(--muted);transition:.25s;flex:none}
+.blk.open .chev{transform:rotate(180deg)}
+.blk.full .n{background:linear-gradient(145deg,#2ee6a8,#1aa7c9)}
+.steps{display:none;width:100%;margin-top:12px;gap:6px}
+.blk.open .steps{display:grid}
+.stp{display:flex;align-items:center;gap:11px;padding:10px 11px;border-radius:13px;background:rgba(5,10,30,.5);border:1px solid rgba(140,170,255,.1);transition:.2s}
+.stp .box{width:22px;height:22px;border-radius:7px}
+.stp .box svg{width:13px;height:13px}
+.stp span{font-size:13px;line-height:1.35;color:#d5def8}
+.stp.on .box{background:var(--grad);border-color:transparent;box-shadow:0 3px 10px rgba(61,123,255,.45)}
+.stp.on .box svg{opacity:1;transform:none}
+.stp.on span{color:var(--muted);text-decoration:line-through}
+
+/* checks */
+.chk{display:flex;align-items:center;gap:13px;padding:14px;border-radius:18px;background:rgba(10,18,50,.55);border:1px solid var(--stroke);margin-bottom:9px;cursor:pointer;user-select:none;transition:.25s}
+.box{width:28px;height:28px;border-radius:9px;border:2px solid #3a4785;display:grid;place-items:center;flex:none;transition:.25s}
+.box svg{width:16px;height:16px;stroke:#fff;stroke-width:3;opacity:0;transform:scale(.5);transition:.25s}
+.chk.on{background:linear-gradient(140deg,rgba(61,123,255,.2),rgba(106,92,255,.12));border-color:rgba(110,150,255,.4)}
+.chk.on .box{background:var(--grad);border-color:transparent;box-shadow:0 4px 14px rgba(61,123,255,.5)}
+.chk.on .box svg{opacity:1;transform:none}
+.chk.on .tx{color:var(--muted);text-decoration:line-through}
+.chk .tx{font-size:14.5px;font-weight:600}
+.chk .d{margin-left:auto;font-size:11.5px;color:var(--muted);white-space:nowrap;font-weight:700}
+.risk{display:flex;gap:12px;align-items:flex-start;font-size:13.5px;line-height:1.5;color:#c5d1f5;margin-bottom:12px}
+.risk .ic{width:36px;height:36px;border-radius:11px}
+.risk .ic svg{width:17px;height:17px}
+.risk b{color:var(--text);display:block;font-size:14px}
+
+/* nav */
+nav{position:fixed;left:12px;right:12px;bottom:calc(env(safe-area-inset-bottom) + 10px);z-index:5}
+nav .in{max-width:520px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);padding:7px;border-radius:24px;
+  background:rgba(10,18,52,.72);backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);
+  border:1px solid rgba(140,170,255,.18);box-shadow:0 18px 40px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.08)}
+nav button{background:none;border:0;color:var(--dim);font:700 10.5px Manrope,sans-serif;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 0;border-radius:18px;transition:.25s}
+nav button svg{width:21px;height:21px}
+nav button.act{color:#fff;background:linear-gradient(145deg,rgba(61,123,255,.55),rgba(106,92,255,.4));box-shadow:0 6px 18px rgba(61,123,255,.35),inset 0 1px 0 rgba(255,255,255,.2)}
+.view{display:none}
+.view.act{display:block;animation:in .35s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="bg"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div><div class="grain"></div></div>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+  <symbol id="map" viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></symbol>
+  <symbol id="award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></symbol>
+  <symbol id="play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></symbol>
+  <symbol id="checksq" viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></symbol>
+  <symbol id="term" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></symbol>
+  <symbol id="globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
+  <symbol id="book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></symbol>
+  <symbol id="moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+  <symbol id="target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+  <symbol id="cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+  <symbol id="alert" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+  <symbol id="flame" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol>
+  <symbol id="gift" viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></symbol>
+  <symbol id="type" viewBox="0 0 24 24"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></symbol>
+  <symbol id="wallet" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></symbol>
+  <symbol id="info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></symbol>
+  <symbol id="check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="chev" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></symbol>
+  <symbol id="arrow" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></symbol>
+</svg>
+
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <div class="logo">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+          <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7fe8ff"/><stop offset="1" stop-color="#ffffff"/></linearGradient></defs>
+          <path d="M12 2.5l7.5 3v6c0 4.6-3.1 8.5-7.5 10-4.4-1.5-7.5-5.4-7.5-10v-6l7.5-3z" stroke="url(#lg)" stroke-width="1.8" stroke-linejoin="round" fill="rgba(255,255,255,.08)"/>
+          <path d="M7.5 12.5h2.3l1.3-3 2 6 1.3-3h2.1" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div><h1>SOC Path</h1><p>путь к SOC-аналитику</p></div>
+    </div>
+    <div class="date mono" id="today"></div>
+  </header>
+
+  <!-- TODAY -->
+  <section class="view act" id="v-home">
+    <div class="card hero">
+      <div class="m1"></div><div class="m2"></div><div class="grid"></div>
+      <span class="tag"><span class="dot"></span><span id="stTag">Сейчас</span></span>
+      <h2 id="stName">—</h2>
+      <div class="what" id="stWhat"></div>
+      <div class="ring">
+        <div class="ctr">
+          <svg viewBox="0 0 80 80"><defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7fe8ff"/><stop offset="1" stop-color="#ffffff"/></linearGradient></defs>
+            <circle cx="40" cy="40" r="33" stroke="rgba(255,255,255,.18)" stroke-width="8" fill="none"/>
+            <circle id="ringArc" cx="40" cy="40" r="33" stroke="url(#rg)" stroke-width="8" fill="none" stroke-linecap="round" stroke-dasharray="207.3" stroke-dashoffset="207.3" style="transition:stroke-dashoffset 1.2s cubic-bezier(.2,.8,.2,1)"/></svg>
+          <span id="ringPct">0%</span>
+        </div>
+        <div><div class="num" id="stLeft">—</div><small id="stDates"></small></div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="card stat"><b id="sDay">0</b><span>день пути</span></div>
+      <div class="card stat"><b id="sPct">0%</b><span>всего пути</span></div>
+      <div class="card stat"><b id="sCert">0/3</b><span>сертификатов</span></div>
+    </div>
+
+    <div class="card" id="courseToday" style="display:none">
+      <div class="h"><span class="hi"><svg class="i"><use href="#play"/></svg></span>Курс сегодня</div>
+      <div class="blk today" style="margin:0;cursor:default"><span class="n" id="ctN"></span><div class="mid"><b id="ctName"></b><small id="ctSteps"></small><div class="mini"><i id="ctBar" style="width:0"></i></div></div></div>
+      <div class="sub" id="ctFin" style="margin-top:10px"></div>
+    </div>
+
+    <div class="card">
+      <div class="h"><span class="hi"><svg class="i"><use href="#cal"/></svg></span>Мой день</div>
+      <div class="routine">
+        <div class="ri"><div class="ic g1"><svg class="i"><use href="#term"/></svg></div><div><b>TryHackMe</b><small id="rTHM">2 комнаты, сложная = 1</small></div><span class="t">~2 ч</span></div>
+        <div class="ri"><div class="ic g2"><svg class="i"><use href="#globe"/></svg></div><div><b>Испанский</b><small>Duolingo → курсы</small></div><span class="t">1 ч+</span></div>
+        <div class="ri"><div class="ic g3"><svg class="i"><use href="#book"/></svg></div><div><b>Дневник хакера</b><small>схемы + английские термины</small></div><span class="t">по ходу</span></div>
+        <div class="ri"><div class="ic g4"><svg class="i"><use href="#moon"/></svg></div><div><b>Лёгкий день</b><small>1 комната или повторение</small></div><span class="t">1× в нед</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="goal"><div class="ic g1"><svg class="i"><use href="#target"/></svg></div><div><small>Следующая цель</small><b id="nextGoal">—</b><small id="nextWhen"></small></div></div>
+    </div>
+  </section>
+
+  <!-- PLAN -->
+  <section class="view" id="v-plan">
+    <div class="card">
+      <div class="h"><span class="hi"><svg class="i"><use href="#map"/></svg></span>Этапы и сроки</div>
+      <div class="sub" style="margin:-6px 0 14px">~6,5 месяцев · 15 ноя 2026 → конец мая 2027</div>
+      <div class="ptop">
+        <div class="big"><b id="pLeft">—</b><span id="pLeftL">дней до финиша плана</span></div>
+        <div class="seg" id="pSeg"></div>
+        <div class="legend"><span>15 ноя</span><span id="pMid"></span><span>31 мая</span></div>
+      </div>
+      <div class="tl" id="timeline"></div>
+    </div>
+  </section>
+
+  <!-- CERTS -->
+  <section class="view" id="v-certs">
+    <div class="card">
+      <div class="h"><span class="hi"><svg class="i"><use href="#award"/></svg></span>Золотые сертификаты</div>
+      <div class="label">До первой работы</div>
+      <div class="cert"><div class="medal gold">01</div><div><b>SAL1</b><small>TryHackMe · практика после SOC L1</small></div><div class="when">фев 2027</div></div>
+      <div class="cert"><div class="medal silver">02</div><div><b>Security+ 701</b><small>главный HR-фильтр · EN</small></div><div class="when">апр 2027</div></div>
+      <div class="cert"><div class="medal bronze">03</div><div><b>BTL1</b><small>Centri · топ для SOC L1</small></div><div class="when">май 2027</div></div>
+      <div class="label">Уже на работе</div>
+      <div class="cert"><div class="medal blue">04</div><div><b>Microsoft SC-200</b><small>Sentinel и Defender</small></div><div class="when">позже</div></div>
+      <div class="cert"><div class="medal violet">05</div><div><b>CompTIA CySA+</b><small>рост до L2</small></div><div class="when">позже</div></div>
+      <div class="label">Не сейчас</div>
+      <div class="no"><span>CISSP</span><span>OSCP</span><span>CCNA</span><span>CEH</span></div>
+    </div>
+    <div class="card">
+      <div class="h"><span class="hi"><svg class="i"><use href="#info"/></svg></span>Про Security+</div>
+      <div class="li"><svg class="i"><use href="#check"/></svg><div>Версия <b style="color:#fff">701</b>: больше материалов, английская действует до 11 июня 2027</div></div>
+      <div class="li"><svg class="i"><use href="#check"/></svg><div>При записи спросить про <b style="color:#fff">+30 минут</b> для неносителей</div></div>
+      <div class="li"><svg class="i"><use href="#check"/></svg><div>Сдавать при стабильных <b style="color:#8fe3ff">85%+</b> на пробных тестах</div></div>
+      <div class="li" style="margin:0"><svg class="i"><use href="#check"/></svg><div>Переводчик нельзя, дампы не использовать</div></div>
+    </div>
+  </section>
+
+  <!-- COURSE -->
+  <section class="view" id="v-course">
+    <div class="card">
+      <div class="h"><span class="hi"><svg class="i"><use href="#play"/></svg></span>Курс Просто Devops</div>
+      <div class="sub" style="margin:-6px 0 14px">33 шага · 15–30 ноября · 2–3 шага (~40 мин) в день</div>
+      <div class="cprog">
+        <div class="ctr"><svg viewBox="0 0 80 80"><defs><linearGradient id="rg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22d3ff"/><stop offset="1" stop-color="#7b5cff"/></linearGradient></defs><circle cx="40" cy="40" r="33" stroke="rgba(255,255,255,.12)" stroke-width="8" fill="none"/>
+          <circle id="cArc" cx="40" cy="40" r="33" stroke="url(#rg2)" stroke-width="8" fill="none" stroke-linecap="round" stroke-dasharray="207.3" stroke-dashoffset="207.3" style="transition:stroke-dashoffset .6s cubic-bezier(.2,.8,.2,1)"/></svg>
+          <span id="cPct">0/33</span></div>
+        <div><b id="cLeft">—</b><small id="cFin"></small><span class="pace ok" id="cPace"></span></div>
+      </div>
+      <div id="course"></div>
+      <div class="sub" style="margin-top:6px">Git и Docker Compose — в апреле, для GitHub и домашней лабы.</div>
+      <a class="link" href="https://www.youtube.com/watch?v=a55ecIWIkVc">Видео «Всё о сетях» <svg class="i"><use href="#arrow"/></svg></a>
+    </div>
+  </section>
+
+  <!-- CHECK -->
+  <section class="view" id="v-check">
+    <div class="card">
+      <div class="h"><span class="hi"><svg class="i"><use href="#checksq"/></svg></span>Контрольные точки</div>
+      <div id="checks"></div>
+    </div>
+    <div class="card">
+      <div class="h"><span class="hi"><svg class="i"><use href="#alert"/></svg></span>Риски</div>
+      <div class="risk"><div class="ic g3"><svg class="i"><use href="#flame"/></svg></div><div><b>Выгорание</b>Лёгкий день обязателен. Отставание на 1–2 недели — нормально.</div></div>
+      <div class="risk"><div class="ic g2"><svg class="i"><use href="#gift"/></svg></div><div><b>Праздники</b>Запас уже заложен в SOC Level 1.</div></div>
+      <div class="risk"><div class="ic g1"><svg class="i"><use href="#type"/></svg></div><div><b>Английский</b>Если к марту тесты ниже 75% — сдвинуть Security+ на май.</div></div>
+      <div class="risk" style="margin:0"><div class="ic g4"><svg class="i"><use href="#wallet"/></svg></div><div><b>Бюджет</b>Security+ и BTL1 самые дорогие — откладывать заранее.</div></div>
+    </div>
+  </section>
+</div>
+
+<nav><div class="in">
+  <button class="act" data-v="home"><svg class="i"><use href="#zap"/></svg>Сегодня</button>
+  <button data-v="plan"><svg class="i"><use href="#map"/></svg>План</button>
+  <button data-v="certs"><svg class="i"><use href="#award"/></svg>Серты</button>
+  <button data-v="course"><svg class="i"><use href="#play"/></svg>Курс</button>
+  <button data-v="check"><svg class="i"><use href="#checksq"/></svg>Чек</button>
+</div></nav>
+
+<script>
+const D=s=>new Date(s+"T00:00:00");
+const START=D("2026-11-15"), END=D("2027-05-31"), day=864e5;
+const stages=[
+ {n:"База",from:"2026-11-15",to:"2026-11-30",what:"Курс Просто Devops ~40 мин + 1 комната Cyber Security 101 в день",items:["Видео о сетях + конспект","5 блоков курса (33 шага)","1 комната SEC1 в день"],ok:"Курс пройден"},
+ {n:"Cyber Security 101",from:"2026-12-01",to:"2026-12-20",what:"2 комнаты в день до конца пути",items:["2 комнаты в день","Термины на английском в дневник"],ok:"Рисуешь путь DNS → TCP → TLS → HTTP и знаешь порты 22, 25, 53, 80, 443, 445, 3389"},
+ {n:"SOC Level 1",from:"2026-12-21",to:"2027-02-08",what:"~65 комнат: логи Windows и Sysmon, Splunk, Elastic, фишинг, MITRE ATT&CK, Wireshark",items:["~65 комнат","24 дек – 1 янв: лёгкий режим, 1 комната","Логи, SIEM, фишинг, ATT&CK"],ok:"Разбираешь фишинг и пишешь запрос в Splunk без подсказок"},
+ {n:"SAL1",from:"2027-02-09",to:"2027-02-22",what:"SOC Simulator, повторение, шаблон отчёта на английском → экзамен",items:["SOC Simulator","Шаблон отчёта об инциденте (EN)","Проверить правила про переводчик"],ok:"Сертификат №1"},
+ {n:"Security+ 701",from:"2027-02-23",to:"2027-04-15",what:"Видео Messer, Anki, пробные тесты + 30 мин Wireshark в день",items:["Нед. 1–4: Messer + Anki","Нед. 5–6: тесты Messer и Dion","Запись на экзамен в начале марта"],ok:"Сдавать при 85%+ на пробных тестах"},
+ {n:"BTL1 + лаба",from:"2027-04-16",to:"2027-05-31",what:"Курс BTL1, домашняя лаба (VirtualBox, Sysmon, Wazuh), разборы на GitHub",items:["Курс BTL1 ~6 недель","Лаба: Windows + Sysmon + Wazuh","2–3 разбора на GitHub"],ok:"Сертификат №3"},
+ {n:"Поиск работы",from:"2027-04-15",to:"2027-09-30",what:"Резюме ES + EN, LinkedIn, InfoJobs, отклики на SOC L1",items:["Telefónica Tech, S21sec, Entelgy, Accenture","Международная удалёнка","Реально: оффер летом–осенью 2027"],ok:"Первая работа SOC L1"}
+];
+const course=[
+ {n:"05",name:"Сети и интернет",steps:"все 10 шагов",from:"2026-11-15",to:"2026-11-18",list:["Что надо знать в сетях?","Локальная сеть, интернет, роутер и NAT","IP-адрес, localhost и порты","DNS","Путь пакета","HTTP и HTTPS","HTTP-детектив","TLS-сертификаты","Что происходит, когда вводишь адрес сайта","Квиз: Сети и интернет"]},
+ {n:"02",name:"Linux",steps:"все 6 шагов",from:"2026-11-19",to:"2026-11-20",list:["Почему Linux и зачем терминал","Базовые команды за 10 минут","SSH","Практика: попробуй терминал","Права доступа: rwx, chmod, sudo","Квиз: Linux основы"]},
+ {n:"06",name:"Серверы, ОС, облака",steps:"шаги 1–4, 6, 7",from:"2026-11-21",to:"2026-11-23",list:["Что такое сервер на самом деле","Windows и Linux: где что используется","Linux: файловая структура и команды","Терминал-тренажёр","Виртуальные машины и контейнеры","Облака: IaaS, PaaS, SaaS"]},
+ {n:"08",name:"Надёжность и безопасность",steps:"шаги 1–7",from:"2026-11-24",to:"2026-11-27",list:["Аутентификация, авторизация, SSH","Логи, метрики и мониторинг","Дашборд: всё ли ок?","Корпоративная среда: доступы, VPN","Траблшутинг","Сайт упал. Что делать?","Как использовать AI и не деградировать"]},
+ {n:"04",name:"Данные и взаимодействие",steps:"шаги 1, 2, 5, 7",from:"2026-11-28",to:"2026-11-30",list:["Что такое база данных","SQL-базы: таблицы, строки, связи","API: как программы общаются","REST и форматы: JSON, XML, YAML"]}
+];
+const TOTAL_STEPS=course.reduce((a,c)=>a+c.list.length,0);
+const C_START=D("2026-11-15"), C_END=D("2026-11-30");
+const PACE=TOTAL_STEPS/(Math.round((C_END-C_START)/day)+1); // ~2 шага в день по плану
+const sk=(bi,si)=>"s"+course[bi].n+"_"+si;
+const doneIn=bi=>course[bi].list.filter((_,si)=>store[sk(bi,si)]).length;
+const doneAll=()=>course.reduce((a,_,bi)=>a+doneIn(bi),0);
+const addDays=(d,n)=>new Date(d.getTime()+n*day);
+function forecast(){
+ const done=doneAll(), left=TOTAL_STEPS-done;
+ const base=now<C_START?C_START:now;
+ const fin=left===0?null:addDays(base,Math.ceil(left/PACE)-1);
+ const diff=fin?Math.round((C_END-fin)/day):null;
+ return {done,left,fin,diff,days:Math.ceil(left/PACE)};
+}
+const checks=[
+ ["c1","Курс Просто Devops пройден","30 ноя"],["c2","Cyber Security 101 завершён","20 дек"],["c3","SOC Level 1 завершён","8 фев"],
+ ["c4","SAL1 сдан","22 фев"],["c5","Записался на Security+","нач. мар"],["c6","Security+ сдан","сер. апр"],
+ ["c7","Резюме ES + EN готово","сер. апр"],["c8","BTL1 сдан","конец мая"]
+];
+const fmt=d=>d.toLocaleDateString("ru-RU",{day:"numeric",month:"short"});
+const now=new Date(); now.setHours(0,0,0,0);
+const $=id=>document.getElementById(id);
+$("today").innerHTML=now.toLocaleDateString("ru-RU",{weekday:"short"})+"<br>"+now.toLocaleDateString("ru-RU",{day:"numeric",month:"long"});
+
+let store={}; try{store=JSON.parse(localStorage.getItem("socpath")||"{}")}catch(e){}
+const save=()=>{try{localStorage.setItem("socpath",JSON.stringify(store))}catch(e){}};
+
+const main=stages.slice(0,6), pre=now<START;
+let cur=main.find(s=>now>=D(s.from)&&now<=D(s.to)) || (now>END?stages[6]:main[0]);
+const ci=stages.indexOf(cur)+1, cf=D(cur.from), ct=D(cur.to);
+const sp=pre?0:Math.min(100,Math.max(0,Math.round((now-cf)/(ct-cf+day)*100)));
+$("stTag").textContent=pre?"Старт 15 ноября":"Сейчас · этап "+ci+" из 7";
+$("stName").textContent=cur.n;
+$("stWhat").textContent=cur.what;
+const left=Math.max(0,Math.round((ct-now)/day)+1);
+$("stLeft").textContent=pre?Math.round((START-now)/day)+" дн.":left+" дн.";
+$("stDates").textContent=pre?"до старта · "+fmt(cf)+" → "+fmt(ct):"до конца этапа · "+fmt(cf)+" → "+fmt(ct);
+$("ringPct").textContent=sp+"%";
+requestAnimationFrame(()=>setTimeout(()=>{$("ringArc").style.strokeDashoffset=207.3*(1-sp/100)},80));
+if(ci===1) $("rTHM").textContent="1 комната SEC1 + курс 40 мин";
+
+const total=Math.round((END-START)/day)+1, passed=Math.round((now-START)/day)+1;
+$("sDay").textContent=pre?0:Math.min(passed,total);
+$("sPct").textContent=(pre?0:Math.min(100,Math.round(passed/total*100)))+"%";
+const upd=()=>{
+ const f=forecast();
+ if(f.left===0 && !store.c1){store.c1=true;save();if($("checks").children.length)renderChecks();}
+ $("sCert").textContent=["c4","c6","c8"].filter(k=>store[k]).length+"/3";
+ const n=checks.find(c=>!store[c[0]]);
+ $("nextGoal").textContent=n?n[1]:"Все точки пройдены";
+ $("nextWhen").textContent=!n?"":(n[0]==="c1"&&f.fin?`осталось ${f.left} шагов · финиш ~${fmt(f.fin)} (план ${n[2]})`:"к "+n[2]);
+ // course card
+ $("cPct").textContent=f.done+"/"+TOTAL_STEPS;
+ $("cArc").style.strokeDashoffset=207.3*(1-f.done/TOTAL_STEPS);
+ const p=$("cPace");
+ if(f.left===0){$("cLeft").textContent="Курс пройден!";$("cFin").textContent="Все 33 шага готовы. Отличная работа";p.className="pace ok";p.textContent="готово";}
+ else{
+  $("cLeft").textContent=`Осталось ${f.left} шагов`;
+  $("cFin").textContent=`≈ ${f.days} дн. · финиш ~${fmt(f.fin)} · план ${fmt(C_END)}`;
+  if(f.diff>0){p.className="pace ahead";p.textContent=`опережаешь на ${f.diff} дн.`;}
+  else if(f.diff<0){p.className="pace behind";p.textContent=`отстаёшь на ${-f.diff} дн.`;}
+  else{p.className="pace ok";p.textContent="идёшь по плану";}
+ }
+ // today card
+ if(ctd){const bi=course.indexOf(ctd),d=doneIn(bi);
+  $("ctSteps").textContent=`${d}/${ctd.list.length} шагов · ${fmt(D(ctd.from))}–${fmt(D(ctd.to))}`;
+  $("ctBar").style.width=(d/ctd.list.length*100)+"%";
+  $("ctFin").textContent=f.left?`Весь курс: ${f.done}/${TOTAL_STEPS} · финиш ~${fmt(f.fin)}`:"Весь курс пройден";}
+};
+
+const ctd=course.find(c=>now>=D(c.from)&&now<=D(c.to)) || (pre?course[0]:null);
+if(ctd){$("courseToday").style.display="block";$("ctN").textContent=ctd.n;$("ctName").textContent=ctd.name;}
+
+const plural=(n,a,b,c)=>{const m=n%10,h=n%100;return m===1&&h!==11?a:(m>=2&&m<=4&&(h<12||h>14)?b:c)};
+const dn=n=>n+" "+plural(n,"день","дня","дней");
+// overall countdown
+const planLeft=Math.max(0,Math.round((END-now)/day));
+$("pLeft").textContent=now>END?"✓":planLeft;
+$("pLeftL").textContent=now>END?"план пройден":plural(planLeft,"день","дня","дней")+" до финиша плана";
+const mainDur=main.map(s=>Math.round((D(s.to)-D(s.from))/day)+1), sumDur=mainDur.reduce((a,b)=>a+b,0);
+const meX=Math.min(100,Math.max(0,(now-START)/(END-START+day)*100));
+$("pSeg").innerHTML=main.map((s,i)=>`<i style="flex:${mainDur[i]}" title="${s.n}"><u data-w="${Math.min(100,Math.max(0,(now-D(s.from))/(D(s.to)-D(s.from)+day)*100))}"></u></i>`).join("")+(pre?"":`<span class="me" style="left:${meX}%"></span>`);
+$("pMid").textContent=pre?"старт завтра":"сегодня · "+Math.round(meX)+"%";
+
+$("timeline").innerHTML=stages.map((s,i)=>{
+ const f=D(s.from),t=D(s.to),done=now>t,isNow=now>=f&&now<=t&&i<6||(i===6&&now>=f&&now>END);
+ const dur=Math.round((t-f)/day)+1;
+ const toStart=Math.round((f-now)/day), toEnd=Math.round((t-now)/day)+1;
+ const pct=Math.min(100,Math.max(0,(now-f)/(t-f+day)*100));
+ const parallel=i===6&&now>=f&&now<=t&&!isNow;
+ const chip=done?`<span class="cd past">✓ завершён</span>`:(isNow||parallel)?`<span class="cd now">осталось ${dn(toEnd)}</span>`:`<span class="cd fut">через ${dn(toStart)}</span>`;
+ const showBar=!done&&(isNow||parallel);
+ return `<div class="st ${done?"done":""} ${isNow?"now":""}"><span class="nb">${done?"✓":i+1}</span>
+ <div class="top"><span class="nm">${s.n}</span>${chip}</div>
+ <div class="dt mono" style="margin-top:3px">${fmt(f)} – ${fmt(t)} · ${dn(dur)}</div>
+ ${showBar?`<div class="sbar"><i data-w="${pct}"></i></div><div class="smeta"><span>прошло ${dn(Math.round((now-f)/day))}</span><span>${Math.round(pct)}%</span></div>`:""}
+ <ul>${s.items.map(x=>`<li>${x}</li>`).join("")}</ul>
+ <div class="ok"><svg class="i"><use href="#check"/></svg><span>${s.ok}</span></div></div>`}).join("");
+const animPlan=()=>{document.querySelectorAll("#v-plan [data-w]").forEach(el=>{el.style.width="0";requestAnimationFrame(()=>setTimeout(()=>el.style.width=el.dataset.w+"%",60))})};
+
+const openSet=new Set([ctd?course.indexOf(ctd):0]);
+function renderCourse(){
+ $("course").innerHTML=course.map((c,bi)=>{const d=doneIn(bi),full=d===c.list.length;
+  return `<div class="blk ${c===ctd?"today":""} ${full?"full":""} ${openSet.has(bi)?"open":""}" data-b="${bi}">
+  <span class="n">${full?"✓":c.n}</span>
+  <div class="mid"><b>${c.name}</b><small>${c.steps} · ${fmt(D(c.from))}–${fmt(D(c.to))}</small><div class="mini"><i style="width:${d/c.list.length*100}%"></i></div></div>
+  <span class="cnt">${d}/${c.list.length}</span><svg class="i chev"><use href="#chev"/></svg>
+  <div class="steps">${c.list.map((s,si)=>`<div class="stp ${store[sk(bi,si)]?"on":""}" data-s="${si}"><div class="box"><svg class="i"><use href="#check"/></svg></div><span>${s}</span></div>`).join("")}</div>
+ </div>`}).join("");
+}
+renderCourse();
+$("course").addEventListener("click",e=>{
+ const blk=e.target.closest(".blk"); if(!blk)return; const bi=+blk.dataset.b;
+ const st=e.target.closest(".stp");
+ if(st){const k=sk(bi,+st.dataset.s);store[k]=!store[k];save();}
+ else{openSet.has(bi)?openSet.delete(bi):openSet.add(bi);}
+ renderCourse();upd();
+});
+
+const renderChecks=()=>{$("checks").innerHTML=checks.map(c=>`<div class="chk ${store[c[0]]?"on":""}" data-k="${c[0]}"><div class="box"><svg class="i"><use href="#check"/></svg></div><span class="tx">${c[1]}</span><span class="d">${c[2]}</span></div>`).join("")};
+renderChecks();
+upd();
+$("checks").addEventListener("click",e=>{const el=e.target.closest(".chk");if(!el)return;const k=el.dataset.k;store[k]=!store[k];save();el.classList.toggle("on",!!store[k]);upd();});
+
+document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>{
+ document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("act",x===b));
+ document.querySelectorAll(".view").forEach(v=>v.classList.toggle("act",v.id==="v-"+b.dataset.v));
+ if(b.dataset.v==="plan") animPlan();
+ window.scrollTo({top:0,behavior:"smooth"});
+}));
+</script>
+</body>
+</html>
