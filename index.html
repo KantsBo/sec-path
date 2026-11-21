@@ -579,12 +579,12 @@ html{background:#160e38}
     </div>
 
     <div class="card soft">
-      <div class="sh"><span>Мой день</span><small>~3,5 ч</small></div>
+      <div class="sh"><span>Мой день</span><small>1 комната + испанский</small></div>
       <div class="tiles">
-        <div class="tile"><div class="ti g1"><svg class="i"><use href="#term"/></svg></div><div><small>TryHackMe</small><b>2,5 ч</b></div></div>
+        <div class="tile"><div class="ti g1"><svg class="i"><use href="#term"/></svg></div><div><small>TryHackMe</small><b>1 комната</b></div></div>
         <div class="tile"><div class="ti g2"><svg class="i"><use href="#globe"/></svg></div><div><small>Испанский</small><b>1 ч+</b></div></div>
         <div class="tile"><div class="ti g3"><svg class="i"><use href="#book"/></svg></div><div><small>Дневник</small><b>по ходу</b></div></div>
-        <div class="tile"><div class="ti g4"><svg class="i"><use href="#moon"/></svg></div><div><small>Лёгкий день</small><b>по вс</b></div></div>
+        <div class="tile"><div class="ti g4"><svg class="i"><use href="#moon"/></svg></div><div><small>Выходной</small><b>воскресенье</b></div></div>
       </div>
     </div>
 
@@ -598,11 +598,11 @@ html{background:#160e38}
   <section class="view" id="v-plan">
     <div class="card">
       <div class="h"><span class="hi"><svg class="i"><use href="#map"/></svg></span>Этапы и сроки</div>
-      <div class="sub" style="margin:-6px 0 14px">~6,5 месяцев · 15 ноя 2026 → конец мая 2027</div>
+      <div class="sub" style="margin:-6px 0 14px">~8 месяцев · 21 ноя 2026 → середина июля 2027 · 1 комната в день, вс — выходной</div>
       <div class="ptop">
         <div class="big"><b id="pLeft">—</b><span id="pLeftL">дней до финиша плана</span></div>
         <div class="seg" id="pSeg"></div>
-        <div class="legend"><span>15 ноя</span><span id="pMid"></span><span>31 мая</span></div>
+        <div class="legend"><span>21 ноя</span><span id="pMid"></span><span>16 июл</span></div>
       </div>
       <div class="tl" id="timeline"></div>
     </div>
@@ -613,9 +613,9 @@ html{background:#160e38}
     <div class="card">
       <div class="h"><span class="hi"><svg class="i"><use href="#award"/></svg></span>Золотые сертификаты</div>
       <div class="label">До первой работы</div>
-      <div class="cert"><div class="medal gold">01</div><div><b>SAL1</b><small>TryHackMe · практика после SOC L1</small></div><div class="when">фев 2027</div></div>
-      <div class="cert"><div class="medal silver">02</div><div><b>Security+ 701</b><small>главный HR-фильтр · EN</small></div><div class="when">апр 2027</div></div>
-      <div class="cert"><div class="medal bronze">03</div><div><b>BTL1</b><small>Centri · топ для SOC L1</small></div><div class="when">май 2027</div></div>
+      <div class="cert"><div class="medal gold">01</div><div><b>SAL1</b><small>TryHackMe · практика после SOC L1</small></div><div class="when">апр 2027</div></div>
+      <div class="cert"><div class="medal silver">02</div><div><b>Security+ 701</b><small>главный HR-фильтр · EN</small></div><div class="when">май 2027</div></div>
+      <div class="cert"><div class="medal bronze">03</div><div><b>BTL1</b><small>Centri · топ для SOC L1</small></div><div class="when">июл 2027</div></div>
       <div class="label">Уже на работе</div>
       <div class="cert"><div class="medal blue">04</div><div><b>Microsoft SC-200</b><small>Sentinel и Defender</small></div><div class="when">позже</div></div>
       <div class="cert"><div class="medal violet">05</div><div><b>CompTIA CySA+</b><small>рост до L2</small></div><div class="when">позже</div></div>
@@ -639,12 +639,12 @@ html{background:#160e38}
         <div class="ctr"><svg viewBox="0 0 80 80"><defs><linearGradient id="rg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b8a6ff"/><stop offset="1" stop-color="#9b6bff"/></linearGradient></defs><circle cx="40" cy="40" r="33" stroke="rgba(255,255,255,.12)" stroke-width="8" fill="none"/>
           <circle id="cArc" cx="40" cy="40" r="33" stroke="url(#rg2)" stroke-width="8" fill="none" stroke-linecap="round" stroke-dasharray="207.3" stroke-dashoffset="207.3" style="transition:stroke-dashoffset .6s cubic-bezier(.2,.8,.2,1)"/></svg>
           <span id="cPct">0</span></div>
-        <div><b id="cLeft">—</b><span class="pace ok" id="cPace"></span></div>
+        <div><b id="cLeft">—</b><small id="cFin"></small><span class="pace ok" id="cPace"></span></div>
       </div>
       <div class="fchips" id="fchips"><button data-f="all" class="on">Все</button><button data-f="left">Осталось</button><button data-f="done">Пройдено</button><span class="sp"></span><button data-f="fold" aria-label="Свернуть всё" style="padding:8px 10px;display:grid;place-items:center"><svg class="i" style="width:16px;height:16px;transform:rotate(180deg)"><use href="#chev"/></svg></button></div>
       <div class="lgd">
-        <span><i class="dd d1"></i>лёгкая · 2–3 в день</span><span><i class="dd d2"></i>средняя · 2 в день</span>
-        <span><i class="dd d3"></i>тяжёлая · 1 в день</span><span><i class="dd d4"></i>очень тяжёлая · 1–2 дня</span>
+        <span><i class="dd d1"></i>лёгкая · ~1 ч</span><span><i class="dd d2"></i>средняя · ~1,5 ч</span>
+        <span><i class="dd d3"></i>тяжёлая · ~2 ч</span><span><i class="dd d4"></i>очень тяжёлая · ~3 ч</span>
       </div>
       <div id="course"></div>
     </div>
@@ -693,16 +693,22 @@ html{background:#160e38}
 
 <script>
 const D=s=>new Date(s+"T00:00:00");
-const START=D("2026-11-15"), END=D("2027-05-31"), day=864e5;
-const SEC_END=D("2026-12-22");
+// Даты без сдвигов из-за перехода на летнее/зимнее время
+const addD=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x;};
+const day=864e5;
+// План пересчитан 21 ноября 2026: 1 комната в день, воскресенье — выходной
+const PLAN0=D("2026-11-21");
+const START=PLAN0, END=D("2027-07-16");
+const isRest=d=>d.getDay()===0;
 const stages=[
- {n:"Cyber Security 101",from:"2026-11-15",to:"2026-12-22",what:"~50 комнат: Windows, сети, криптография, веб, защита. 1–2 комнаты в день",items:["Windows, AD, командная строка","Сети, Wireshark, Nmap","Криптография, Metasploit, веб","Защита, SIEM, OWASP"],ok:"Рисуешь путь DNS → TCP → TLS → HTTP и знаешь порты 22, 25, 53, 80, 443, 445, 3389"},
- {n:"SOC Level 1",from:"2026-12-23",to:"2027-02-08",what:"~65 комнат: логи Windows и Sysmon, Splunk, Elastic, фишинг, MITRE ATT&CK, Wireshark",items:["~65 комнат","24 дек – 1 янв: лёгкий режим","Логи, SIEM, фишинг, ATT&CK"],ok:"Разбираешь фишинг и пишешь запрос в Splunk без подсказок"},
- {n:"SAL1",from:"2027-02-09",to:"2027-02-22",what:"SOC Simulator, повторение, шаблон отчёта на английском → экзамен",items:["SOC Simulator","Шаблон отчёта об инциденте (EN)","Проверить правила про переводчик"],ok:"Сертификат №1"},
- {n:"Security+ 701",from:"2027-02-23",to:"2027-04-15",what:"Видео Messer, Anki, пробные тесты + 30 мин Wireshark в день",items:["Нед. 1–4: Messer + Anki","Нед. 5–6: тесты Messer и Dion","Запись на экзамен в начале марта"],ok:"Сдавать при 85%+ на пробных тестах"},
- {n:"BTL1 + лаба",from:"2027-04-16",to:"2027-05-31",what:"Курс BTL1, домашняя лаба (VirtualBox, Sysmon, Wazuh), разборы на GitHub",items:["Курс BTL1 ~6 недель","Лаба: Windows + Sysmon + Wazuh","2–3 разбора на GitHub"],ok:"Сертификат №3"},
- {n:"Поиск работы",from:"2027-04-15",to:"2027-09-30",what:"Резюме ES + EN, LinkedIn, InfoJobs, отклики на SOC L1",items:["Telefónica Tech, S21sec, Entelgy, Accenture","Международная удалёнка","Реально: оффер летом–осенью 2027"],ok:"Первая работа SOC L1"}
+ {n:"Cyber Security 101",from:"2026-11-21",to:"2027-01-12",what:"55 комнат: Windows, сети, криптография, веб, защита. 1 комната в день, воскресенье — выходной",items:["Windows, AD, командная строка","Сети, Wireshark, Nmap","Криптография, Metasploit, веб","Защита, SIEM, OWASP"],ok:"Рисуешь путь DNS → TCP → TLS → HTTP и знаешь порты 22, 25, 53, 80, 443, 445, 3389"},
+ {n:"SOC Level 1",from:"2027-01-13",to:"2027-03-29",what:"~65 комнат: логи Windows и Sysmon, Splunk, Elastic, фишинг, MITRE ATT&CK, Wireshark",items:["~65 комнат","1 комната в день, воскресенье — выходной","Логи, SIEM, фишинг, ATT&CK"],ok:"Разбираешь фишинг и пишешь запрос в Splunk без подсказок"},
+ {n:"SAL1",from:"2027-03-30",to:"2027-04-12",what:"SOC Simulator, повторение, шаблон отчёта на английском → экзамен",items:["SOC Simulator","Шаблон отчёта об инциденте (EN)","Проверить правила про переводчик"],ok:"Сертификат №1"},
+ {n:"Security+ 701",from:"2027-04-13",to:"2027-05-31",what:"Видео Messer, Anki, пробные тесты + 30 мин Wireshark в день",items:["Нед. 1–4: Messer + Anki","Нед. 5–7: тесты Messer и Dion","Записаться в середине апреля, сдать до 11 июня"],ok:"Сдавать при 85%+ на пробных тестах"},
+ {n:"BTL1 + лаба",from:"2027-06-01",to:"2027-07-16",what:"Курс BTL1, домашняя лаба (VirtualBox, Sysmon, Wazuh), разборы на GitHub",items:["Курс BTL1 ~6 недель","Лаба: Windows + Sysmon + Wazuh","2–3 разбора на GitHub"],ok:"Сертификат №3"},
+ {n:"Поиск работы",from:"2027-05-17",to:"2027-10-31",what:"Резюме ES + EN, LinkedIn, InfoJobs, отклики на SOC L1",items:["Telefónica Tech, S21sec, Entelgy, Accenture","Международная удалёнка","Реально: оффер летом–осенью 2027"],ok:"Первая работа SOC L1"}
 ];
+const SEC_END=D(stages[0].to);
 const NMAIN=5;
 // d: 1 лёгкая, 2 средняя, 3 тяжёлая, 4 очень тяжёлая; h: часы
 const mods=[
@@ -723,9 +729,9 @@ const mods=[
 ];
 const DL=["","лёгкая","средняя","тяжёлая","очень тяжёлая"];
 const checks=[
- ["c2","Cyber Security 101 завершён","22 дек","CS 101","пройден"],["c3","SOC Level 1 завершён","8 фев","SOC Level 1","пройден"],
- ["c4","SAL1 сдан","22 фев","SAL1","сдан"],["c5","Записался на Security+","нач. мар","Security+","запись"],["c6","Security+ сдан","сер. апр","Security+","сдан"],
- ["c7","Резюме ES + EN готово","сер. апр","Резюме","ES + EN"],["c8","BTL1 сдан","кон. мая","BTL1","сдан"]
+ ["c2","Cyber Security 101 завершён","12 янв","CS 101","пройден"],["c3","SOC Level 1 завершён","29 мар","SOC Level 1","пройден"],
+ ["c4","SAL1 сдан","12 апр","SAL1","сдан"],["c5","Записался на Security+","сер. апр","Security+","запись"],["c6","Security+ сдан","кон. мая","Security+","сдан"],
+ ["c7","Резюме ES + EN готово","сер. мая","Резюме","ES + EN"],["c8","BTL1 сдан","сер. июл","BTL1","сдан"]
 ];
 
 const fmt=d=>d.toLocaleDateString("ru-RU",{day:"numeric",month:"short"});
@@ -752,43 +758,62 @@ const save=()=>{try{localStorage.setItem("socpath",JSON.stringify(store))}catch(
 const rk=(mi,ri)=>"r"+mi+"_"+ri;
 if(!store.v3){Object.keys(store).forEach(k=>{if(/^s\d/.test(k)||k==="c1")delete store[k]});
  mods.forEach((m,mi)=>m.r.forEach((r,ri)=>{if(r[3])store[rk(mi,ri)]=true}));store.v3=1;}
-store.t=store.t||{}; store.log=store.log||{}; store.dd=store.dd||{}; save();
+store.t=store.t||{}; store.dd=store.dd||{};
 
 const all=[];mods.forEach((m,mi)=>m.r.forEach((r,ri)=>all.push({mi,ri,k:rk(mi,ri),name:r[0],d:r[1],h:r[2],mod:m.t})));
 const byK={};all.forEach(x=>byK[x.k]=x);
 const isDone=x=>!!store[x.k];
 const TOTAL=all.length, TOTAL_H=all.reduce((a,x)=>a+x.h,0);
-const capOf=d=>d.getDay()===0?1:2.5;
 
-// личный темп: факт / оценка по комнатам с записанным временем
-function paceF(){let est=0,fact=0,n=0;all.forEach(x=>{if(isDone(x)&&store.t[x.k]){est+=x.h*60;fact+=store.t[x.k];n++}});
- if(!n)return {f:1,n:0};return {f:Math.min(2.5,Math.max(.4,fact/est)),n};}
-function finishFor(hours){let d=new Date(Math.max(now,START)),left=hours;
- if(left<=0)return null;
- // учесть уже потраченное сегодня время
- const usedToday=(store.log[TODAY]||{}).m||0;
- let first=true;
- while(true){let cap=capOf(d);if(first&&iso(d)===TODAY)cap=Math.max(0,cap-usedToday/60);first=false;left-=cap;if(left<=1e-9)return d;d=new Date(d.getTime()+day);}}
-function forecast(){const p=paceF();const rest=all.filter(x=>!isDone(x));const raw=rest.reduce((a,x)=>a+x.h,0);const left=raw*p.f;
- const fin=finishFor(left);const diff=fin?Math.round((SEC_END-fin)/day):null;
- const doneH=all.filter(isDone).reduce((a,x)=>a+x.h,0);
- return {done:TOTAL-rest.length,rest,left,fin,diff,p,pct:doneH/TOTAL_H,days:fin?Math.round((fin-new Date(Math.max(now,START)))/day)+1:0};}
+// Точка отсчёта плана: 21 ноября пройдена Windows Command Line (11-я комната)
+const BASE_IDX=all.findIndex(x=>x.name==="Windows Command Line"), BASE=BASE_IDX; // 10 комнат до неё
+if(!store.v4){
+ all.slice(0,BASE_IDX+1).forEach((x,i)=>{if(!store[x.k]){store[x.k]=true;if(i===BASE_IDX)store.dd[x.k]="2026-11-21";}});
+ delete store.log; store.v4=1;
+}
+// почистить «осиротевшие» записи времени (от снятых галочек)
+Object.keys(store.t).forEach(k=>{if(!store[k]||!byK[k])delete store.t[k]});
+Object.keys(store.dd).forEach(k=>{if(!store[k]||!byK[k])delete store.dd[k]});
+save();
 
-// журнал занятий
-const logAdd=(date,m,r)=>{const L=store.log[date]||{m:0,r:0};L.m=Math.max(0,L.m+m);L.r=Math.max(0,L.r+r);store.log[date]=L;};
-function markDone(k,min,date){date=date||TODAY;store[k]=true;store.dd[k]=date;if(min){store.t[k]=min;}logAdd(date,min||0,1);save();}
-function unmark(k){const d=store.dd[k];if(d)logAdd(d,-(store.t[k]||0),-1);delete store[k];delete store.t[k];delete store.dd[k];save();}
+// сколько комнат должно быть пройдено к концу дня d: 1 в день, воскресенье — выходной
+// сдвиг на n рабочих дней (воскресенья пропускаются)
+function shiftW(d,n){let x=new Date(d);const s=n<0?-1:1;for(let i=0;i<Math.abs(n);){x=addD(x,s);if(!isRest(x))i++;}return x;}
+function target(d){if(d<PLAN0)return BASE;let n=BASE;for(let t=new Date(PLAN0);t<=d&&n<TOTAL;t=addD(t,1))if(!isRest(t))n++;return n;}
+
+// журнал занятий собирается из отметок — поэтому никогда не расходится с галочками
+let LOG={};
+function buildLog(){LOG={};all.forEach(x=>{const d=store.dd[x.k];if(store[x.k]&&d){const L=LOG[d]||(LOG[d]={m:0,r:0});L.r++;L.m+=store.t[x.k]||0;}});}
+
+function forecast(){
+ const rest=all.filter(x=>!isDone(x)),done=TOTAL-rest.length;
+ const doneToday=(LOG[TODAY]||{r:0}).r;
+ const tgt=target(now),tgtY=target(addD(now,-1));
+ // + опережаешь, − отстаёшь (в комнатах); сегодняшняя комната ещё не долг
+ const diff=done>=tgt?done-tgt:(done>=tgtY?0:done-tgtY);
+ // прогноз финиша = плановая дата, сдвинутая на опережение/отставание (в рабочих днях)
+ let fin=null;
+ if(rest.length){
+  if(now<=SEC_END)fin=shiftW(SEC_END,-diff);
+  if(!fin||fin<now){let d=new Date(now),left=rest.length;   // план уже закончился — считаем от сегодня
+   for(let g=0;g<2000;g++){if(!isRest(d)){left--;if(!left){fin=d;break;}}d=addD(d,1);}}}
+ return {done,rest,fin,diff,tgt,doneToday,need:Math.max(0,tgt-done),pct:done/TOTAL,
+  left:rest.reduce((a,x)=>a+x.h,0),days:fin?Math.round((fin-now)/day)+1:0};}
+
+function markDone(k,min,date){store[k]=true;store.dd[k]=date||TODAY;if(min)store.t[k]=min;else delete store.t[k];save();}
+function unmark(k){delete store[k];delete store.t[k];delete store.dd[k];save();}
+function restore(k,t,dd){store[k]=true;if(t)store.t[k]=t;if(dd)store.dd[k]=dd;save();}
 
 const main=stages.slice(0,NMAIN), pre=now<START;
 let cur=main.find(s=>now>=D(s.from)&&now<=D(s.to)) || (now>END?stages[NMAIN]:main[0]);
 const ci=stages.indexOf(cur)+1, cf=D(cur.from), ct=D(cur.to);
 const isSec=cur===stages[0];
-$("stTag").textContent=pre?"Старт 15 ноября":"Сейчас · этап "+ci+" из "+stages.length;
+$("stTag").textContent=pre?"Старт "+START.toLocaleDateString("ru-RU",{day:"numeric",month:"long"}):"Сейчас · этап "+ci+" из "+stages.length;
 $("stName").textContent=cur.n;
 $("stWhat").textContent=cur.what;
 function hero(f){
  let pct,big,small;
- if(isSec&&!pre){pct=Math.round(f.pct*100);big=f.fin?dn(f.days):"✓";small=f.fin?`до финиша по прогнозу · ${fmt(f.fin)} (план ${fmt(SEC_END)})`:"этап пройден";}
+ if(isSec&&!pre){pct=Math.round(f.pct*100);big=f.fin?dn(f.days):"✓";small=f.fin?`до финиша · ~${fmt(f.fin)} (план ${fmt(SEC_END)})`:"этап пройден";}
  else{pct=pre?0:Math.min(100,Math.max(0,Math.round((now-cf)/(ct-cf+day)*100)));const l=Math.max(0,Math.round((ct-now)/day)+1);
   big=pre?dn(Math.round((START-now)/day)):dn(l);small=(pre?"до старта · ":"до конца этапа · ")+fmt(cf)+" → "+fmt(ct);}
  $("ringPct").textContent=pct+"%";bigNum($("stLeft"),big);$("stDates").textContent=small;
@@ -800,7 +825,7 @@ countUp($("sPct"),pre?0:Math.min(100,Math.round(passed/total*100)),"%");
 
 // таймер
 let tick=null;
-const tSec=()=>{const T=store.timer;if(!T)return 0;return Math.floor((T.acc+(T.run?Date.now()-T.start:0))/1000);};
+const tSec=()=>{const T=store.timer;if(!T)return 0;return Math.max(0,Math.floor((T.acc+(T.run?Date.now()-T.start:0))/1000));};
 function renderTimer(){const T=store.timer,bar=$("tbar");
  document.body.classList.toggle("tmr",!!(T&&byK[T.k]&&!store[T.k]));
  if(!T||!byK[T.k]||store[T.k]){bar.classList.remove("show");clearInterval(tick);tick=null;return;}
@@ -822,8 +847,10 @@ $("tbDone").onclick=()=>{const T=store.timer;if(T)openSheet(T.k);};
 // окно «сколько времени»
 let shK=null,shV=60;
 function openSheet(k){shK=k;const x=byK[k];const T=store.timer;
- shV=T&&T.k===k?Math.max(5,Math.round(tSec()/60/5)*5):Math.round(x.h*60/5)*5;
- $("shName").textContent=x.name;$("shSub").textContent=(T&&T.k===k?"По таймеру":"Оценка "+hh(x.h))+" · поправь, если нужно";
+ // таймер, забытый на много часов, не подставляем — берём оценку
+ const tm=T&&T.k===k?Math.round(tSec()/60):0, useT=tm>0&&tm<=300;
+ shV=useT?Math.max(5,Math.round(tm/5)*5):Math.round(x.h*60/5)*5;
+ $("shName").textContent=x.name;$("shSub").textContent=(useT?"По таймеру":tm>300?"Таймер шёл больше 5 ч — стоит оценка":"Оценка "+hh(x.h))+" · поправь, если нужно";
  setV(shV);$("ov").classList.add("show");}
 const setV=v=>{shV=Math.max(5,Math.min(600,v));$("shVal").textContent=shV;document.querySelectorAll("#shChips button").forEach(b=>b.classList.toggle("on",+b.dataset.m===shV));};
 document.querySelectorAll(".stepper button").forEach(b=>b.onclick=()=>setV(shV+ +b.dataset.d));
@@ -836,14 +863,16 @@ function finishRoom(min){const k=shK;closeSheet();if(!k)return;
  const modBefore=modFull(byK[k].mi);markDone(k,min);refresh();
  const mf=!modBefore&&modFull(byK[k].mi);
  celebrate(mf?60:24);
- toast(mf?`Раздел «${byK[k].mod}» пройден!`:`Готово: ${byK[k].name}`,()=>{unmark(k);refresh();});}
+ toast(mf?`Раздел «${byK[k].mod}» пройден!`:`Готово: ${byK[k].name}`,()=>{if(store[k]){unmark(k);refresh();}});}
 $("shSave").onclick=()=>finishRoom(shV);
 $("shSkip").onclick=()=>finishRoom(0);
 const modFull=mi=>all.filter(x=>x.mi===mi).every(isDone);
 
 // тост с отменой
 let tT=null;
-function toast(text,undo){$("toastT").textContent=text;const u=$("toastU");u.style.display=undo?"":"none";u.onclick=()=>{undo&&undo();$("toast").classList.remove("show");};
+function toast(text,undo){$("toastT").textContent=text;const u=$("toastU");u.style.display=undo?"":"none";
+ // «Отменить» срабатывает только один раз — двойной тап не задвоит отметку
+ u.onclick=()=>{u.onclick=null;clearTimeout(tT);$("toast").classList.remove("show");undo&&undo();};
  $("toast").classList.add("show");clearTimeout(tT);tT=setTimeout(()=>$("toast").classList.remove("show"),undo?5000:2200);}
 function celebrate(n){const cols=["#b8a6ff","#7c5cff","#9b6bff","#ddd2ff","#fff","#5dffcb"];const cx=innerWidth/2,cy=innerHeight*.45;
  for(let i=0;i<n;i++){const p=document.createElement("i");p.className="burst";p.style.background=cols[i%cols.length];p.style.left=cx+"px";p.style.top=cy+"px";document.body.appendChild(p);
@@ -853,7 +882,7 @@ function celebrate(n){const cols=["#b8a6ff","#7c5cff","#9b6bff","#ddd2ff","#fff"
 // клик по комнате
 function onRoom(e){const pl=e.target.closest(".play");if(pl){e.stopPropagation();startTimer(pl.dataset.k);return true;}
  const st=e.target.closest(".stp");if(!st)return false;const k=st.dataset.k;
- if(store[k]){const x=byK[k],t=store.t[k],dd=store.dd[k];unmark(k);refresh();toast(`Снята отметка: ${x.name}`,()=>{markDone(k,t,dd);if(!dd){store.log[TODAY].r--;delete store.dd[k];save();}refresh();});}
+ if(store[k]){const x=byK[k],t=store.t[k],dd=store.dd[k];unmark(k);refresh();toast(`Снята отметка: ${x.name}`,()=>{if(!store[k]){restore(k,t,dd);refresh();}});}
  else openSheet(k);
  return true;}
 
@@ -862,21 +891,23 @@ const roomRow=(x,mod="")=>{const done=isDone(x),t=store.t[x.k];
  <div class="rm">${mod?`<div class="mtag" style="margin:0 0 3px">${mod}</div>`:""}<span>${x.name}</span><div class="meta"><i class="dd d${x.d}"></i>${DL[x.d]} · <span class="hrs" style="margin:0">~${hh(x.h)}</span>${done&&t?` · <span class="fact">факт ${mm(t)}</span>`:""}</div></div>
  ${done?"":`<button class="play" data-k="${x.k}" aria-label="Старт таймера"><svg class="i"><use href="#pl"/></svg></button>`}</div>`;};
 
-const todayRow=x=>`<div class="stp tday" data-k="${x.k}"><div class="box"><svg class="i"><use href="#check"/></svg></div>
- <div class="nm2"><b>${x.name}</b><small><i class="dd d${x.d}"></i>${DL[x.d]} · ~${hh(x.h)}</small></div>
- <button class="play" data-k="${x.k}" aria-label="Старт таймера"><svg class="i"><use href="#pl"/></svg></button></div>`;
+const todayRow=(x,tag="")=>{const done=isDone(x),t=store.t[x.k];
+ return `<div class="stp tday ${done?"on":""}" data-k="${x.k}"><div class="box"><svg class="i"><use href="#check"/></svg></div>
+ <div class="nm2"><b>${x.name}</b><small>${tag?`<span class="mtag" style="margin:0">${tag}</span>`:""}<i class="dd d${x.d}"></i>${DL[x.d]} · ${done&&t?"факт "+mm(t):"~"+hh(x.h)}</small></div>
+ ${done?"":`<button class="play" data-k="${x.k}" aria-label="Старт таймера"><svg class="i"><use href="#pl"/></svg></button>`}</div>`;};
 
 // активность
 function renderActivity(){
- const has=dt=>{const L=store.log[iso(dt)];return L&&(L.m>0||L.r>0);};
- let streak=0,d=new Date(now);if(!has(d))d=new Date(d.getTime()-day);
- while(has(d)){streak++;d=new Date(d.getTime()-day);}
+ const has=dt=>{const L=LOG[iso(dt)];return !!L&&(L.m>0||L.r>0);};
+ // воскресенье без занятий — выходной, серию не прерывает
+ let streak=0,d=new Date(now);if(!has(d))d=addD(d,-1);
+ for(let g=0;g<1000;g++){if(has(d))streak++;else if(!isRest(d))break;d=addD(d,-1);}
  $("aStreak").textContent=streak?dn(streak)+" подряд":"Серии пока нет";$("aFlame").classList.toggle("off",!streak);
- $("aStreakL").textContent=streak?(has(now)?"сегодня уже позанимался ✓":"позанимайся сегодня, чтобы не прервать"):"отметь первую комнату — и начнётся серия";
- const mon=new Date(now.getTime()-6*day);
- let wm=0,wr=0,tm=0;Object.values(store.log).forEach(L=>tm+=L.m);
+ $("aStreakL").textContent=has(now)?"сегодня уже позанимался ✓":isRest(now)?(streak?"сегодня выходной — серия не сгорит 🌿":"сегодня выходной 🌿"):streak?"позанимайся сегодня, чтобы не прервать":"отметь первую комнату — и начнётся серия";
+ const mon=addD(now,-6);
+ let wm=0,wr=0;
  const W=["вс","пн","вт","ср","чт","пт","сб"];
- $("week").innerHTML=[0,1,2,3,4,5,6].map(i=>{const dt=new Date(mon.getTime()+i*day),w=i===6?"сег":W[dt.getDay()],L=store.log[iso(dt)]||{m:0,r:0};wm+=L.m;wr+=L.r;
+ $("week").innerHTML=[0,1,2,3,4,5,6].map(i=>{const dt=addD(mon,i),w=i===6?"сег":W[dt.getDay()],L=LOG[iso(dt)]||{m:0,r:0};wm+=L.m;wr+=L.r;
   const m=L.m||(L.r?30:0),hgt=Math.min(100,m/150*100);
   return `<div class="wcol ${iso(dt)===TODAY?"td":""} ${dt>now?"fut":""}" title="${fmt(dt)}: ${L.m?mm(L.m):"—"}"><div class="wbar"><i style="height:0" data-h="${hgt}"></i></div><span>${w}</span></div>`}).join("");
  requestAnimationFrame(()=>setTimeout(()=>document.querySelectorAll("#week i[data-h]").forEach((e,i)=>{e.style.transitionDelay=(i*50)+"ms";e.style.height=e.dataset.h+"%"}),60));
@@ -915,35 +946,43 @@ function upd(){
  $("sCert").textContent=["c4","c6","c8"].filter(k=>store[k]).length+"/3";
  const n=checks.find(c=>!store[c[0]]);
  $("nextGoal").textContent=n?n[1]:"Все точки пройдены";
- $("nextWhen").textContent=!n?"":(n[0]==="c2"&&f.fin?`осталось ${f.rest.length} ${plural(f.rest.length,"комната","комнаты","комнат")} · ~${hh(f.left)} · финиш ~${fmt(f.fin)}`:"к "+n[2]);
- if($("rSub"))$("rSub").textContent=`${TOTAL} комнат · ~${Math.round(TOTAL_H)} ч по оценке · 2,5 ч в день, воскресенье лёгкое`;
+ const rw=n=>n+" "+plural(n,"комната","комнаты","комнат"), rwA=n=>n+" "+plural(n,"комнату","комнаты","комнат");
+ $("nextWhen").textContent=!n?"":(n[0]==="c2"&&f.fin?`осталось ${rw(f.rest.length)} · финиш ~${fmt(f.fin)}`:"к "+n[2]);
  $("cPct").textContent=f.done+"/"+TOTAL;
  $("cArc").style.strokeDashoffset=207.3*(1-f.pct);
  const p=$("cPace");
- if(!f.fin){$("cLeft").textContent="Путь пройден!";($("cFin")||{}).textContent="Все комнаты Cyber Security 101 готовы";p.className="pace ok";p.textContent="готово";}
+ if(!f.fin){$("cLeft").textContent="Путь пройден!";$("cFin").textContent="Все комнаты Cyber Security 101 готовы";p.className="pace ok";p.textContent="готово";}
  else{
-  $("cLeft").textContent=`Осталось ${f.rest.length} ${plural(f.rest.length,"комната","комнаты","комнат")}`;
-  ($("cFin")||{}).textContent=`~${hh(f.left)} · ${dn(f.days)} · финиш ~${fmt(f.fin)} · план ${fmt(SEC_END)}`;
-  if(f.diff>0){p.className="pace ahead";p.textContent=`опережаешь на ${dn(f.diff)}`;}
-  else if(f.diff<0){p.className="pace behind";p.textContent=`отстаёшь на ${dn(-f.diff)}`;}
+  $("cLeft").textContent=`Осталось ${rw(f.rest.length)}`;
+  $("cFin").textContent=`1 в день, вс — выходной · финиш ~${fmt(f.fin)} · план ${fmt(SEC_END)}`;
+  if(f.diff>0){p.className="pace ahead";p.textContent=`опережаешь на ${rwA(f.diff)}`;}
+  else if(f.diff<0){p.className="pace behind";p.textContent=`отстаёшь на ${rwA(-f.diff)}`;}
   else{p.className="pace ok";p.textContent="идёшь по плану";}
  }
- if($("paceFx"))$("paceFx").innerHTML=`<svg class="i" style="width:18px;height:18px;color:#cbbcff"><use href="#clock"/></svg><span>`+(f.p.n?`Твой темп: <b>${Math.abs(f.p.f-1)<.05?"как в оценке":(f.p.f<1?"быстрее":"медленнее")+" оценки, ×"+f.p.f.toFixed(2).replace(".",",")}</b> · по ${f.p.n} ${plural(f.p.n,"комнате","комнатам","комнатам")}. Прогноз учитывает это.`:`Отмечай время прохождения — прогноз подстроится под твой реальный темп.`)+`</span>`;
- // комнаты на сегодня
- const used=((store.log[TODAY]||{}).m||0)/60;let cap=Math.max(.5,capOf(now)-used),list=[];
- for(const x of f.rest){const xh=x.h*f.p.f;if(list.length&&cap<xh*0.6)break;list.push(x);cap-=xh;if(cap<=0.4)break;}
- $("trList").innerHTML=list.length?list.map(todayRow).join(""):'<div class="sub">Все комнаты пройдены 🎉</div>';
- $("trCap").textContent=list.length?`${list.length} ${plural(list.length,"комната","комнаты","комнат")} · ~${hh(list.reduce((a,x)=>a+x.h*f.p.f,0))}`:"";
- $("trFin").textContent=f.fin?`Пройдено ${f.done} из ${TOTAL} · финиш ~${fmt(f.fin)}`+(used?` · сегодня уже ${mm(Math.round(used*60))}`:""):"";
+ // комнаты на сегодня: что уже сделано сегодня + план (или бонус)
+ const doneT=all.filter(x=>isDone(x)&&store.dd[x.k]===TODAY), rest=f.rest;
+ let up=[],tag="",cap="",foot="";
+ if(!rest.length){cap="всё пройдено";}
+ else if(isRest(now)){up=rest.slice(0,1);tag="по желанию";cap=doneT.length?`выходной · +${doneT.length} в плюс`:"выходной 🌿";
+  foot=doneT.length?"Ты занимался в выходной — это идёт в плюс к плану":"Сегодня отдых. Если хочется — можно пройти комнату";}
+ else if(f.need>0){up=rest.slice(0,Math.min(f.need,3));cap=f.diff<0?`догнать: ${rw(f.need)}`:rw(f.need);
+  foot=`Пройдено ${f.done} из ${TOTAL} · финиш ~${fmt(f.fin)}`;}
+ else{up=rest.slice(0,1);tag="бонус";cap="план выполнен ✓";
+  foot=`Пройдено ${f.done} из ${TOTAL} · финиш ~${fmt(f.fin)}`;}
+ if(!rest.length)foot=`Пройдено ${TOTAL} из ${TOTAL}`;
+ const usedM=(LOG[TODAY]||{m:0}).m;if(usedM&&foot)foot+=` · сегодня ${mm(usedM)}`;
+ $("trList").innerHTML=(doneT.map(x=>todayRow(x)).join("")+up.map(x=>todayRow(x,tag)).join(""))||'<div class="sub">Все комнаты пройдены 🎉</div>';
+ $("trCap").textContent=cap;
+ $("trFin").textContent=foot;
 }
 
 // график занятий
 let cN=7,cSel=null,chartAnim=true;
-const dayMin=dt=>{const L=store.log[iso(dt)];return L?(L.m||(L.r?30:0)):0;};
+const dayMin=dt=>{const L=LOG[iso(dt)];return L?(L.m||(L.r?30:0)):0;};
 function renderChart(){
  const box=$("chart");if(!box)return;
  const W=Math.max(280,box.clientWidth||340),H=190,pl=30,pr=12,pt=34,pb=26;
- const days=[...Array(cN)].map((_,i)=>new Date(now.getTime()-(cN-1-i)*day));
+ const days=[...Array(cN)].map((_,i)=>addD(now,-(cN-1-i)));
  const vals=days.map(dayMin);
  const mx=Math.max(150,...vals),yMax=Math.ceil(mx/60)*60;
  const X=i=>pl+(cN===1?0:i*(W-pl-pr)/(cN-1)), Y=v=>pt+(H-pt-pb)*(1-v/yMax);
@@ -952,7 +991,7 @@ function renderChart(){
   <text x="${pl-8}" y="${Y(v)+4}" text-anchor="end" font-size="11" fill="#8a82ad">${v?v/60+"ч":"0"}</text>`;}
  // цель
  g+=`<line x1="${pl}" x2="${W-pr}" y1="${Y(150)}" y2="${Y(150)}" stroke="#ddd2ff" stroke-opacity=".45" stroke-dasharray="4 5"/>
-  <text x="${pl+4}" y="${Y(150)-6}" text-anchor="start" font-size="11" fill="#cbbcff" fill-opacity=".8">цель 2,5 ч</text>`;
+  <text x="${pl+4}" y="${Y(150)-6}" text-anchor="start" font-size="11" fill="#cbbcff" fill-opacity=".8">лимит 2,5 ч</text>`;
  const step=cN<=7?1:cN<=14?2:5, W7=["вс","пн","вт","ср","чт","пт","сб"];
  days.forEach((d,i)=>{if((cN-1-i)%step===0)g+=`<text x="${X(i)}" y="${H-6}" text-anchor="middle" font-size="11" fill="${i===cN-1?"#fff":"#8a82ad"}" font-weight="${i===cN-1?600:450}">${i===cN-1?"сег":cN<=7?W7[d.getDay()]:d.getDate()}</text>`;});
  const pts=vals.map((v,i)=>[X(i),Y(v)]);
@@ -987,7 +1026,7 @@ function renderChart(){
   setTimeout(()=>{p.style.strokeDasharray="";p.style.transition=""},1300);}
  // инфо
  const tot=vals.reduce((a,b)=>a+b,0),act=vals.filter(v=>v>0).length;
- if(cSel!=null){const d=days[cSel],L=store.log[iso(d)]||{r:0};
+ if(cSel!=null){const d=days[cSel],L=LOG[iso(d)]||{r:0};
   $("cInfo").innerHTML=`<b>${vals[cSel]?mm(vals[cSel]):"0 мин"}</b><span>${d.toLocaleDateString("ru-RU",{weekday:"short",day:"numeric",month:"short"})} · ${L.r} ${plural(L.r,"комната","комнаты","комнат")}</span>`;}
  else $("cInfo").innerHTML=`<b>${tot?mm(tot):"0 мин"}</b><span>за ${cN} ${plural(cN,"день","дня","дней")}</span>`;
  const sh=m=>m<60?m+" мин":(Math.round(m/6)/10).toString().replace(".",",")+" ч";
@@ -997,7 +1036,7 @@ function renderChart(){
 $("cRange").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;cN=+b.dataset.n;cSel=null;chartAnim=true;
  document.querySelectorAll("#cRange button").forEach(x=>x.classList.toggle("on",x===b));renderChart();});
 addEventListener("resize",()=>renderChart());
-function refresh(){renderCourse();upd();renderActivity();renderTimer();renderChart();}
+function refresh(){buildLog();renderCourse();upd();renderActivity();renderTimer();renderChart();}
 
 // план
 const planLeft=Math.max(0,Math.round((END-now)/day));
