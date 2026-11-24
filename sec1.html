@@ -1,0 +1,753 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Шпаргалка SEC1">
+<meta name="theme-color" content="#0C1412">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="apple-touch-icon.png">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+.back{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font:600 14px/1 "Onest",system-ui,sans-serif;color:var(--accent);text-decoration:none}</style>
+<title>Шпаргалка SEC1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: одна колонка-«тетрадь аналитика»: липкое оглавление, секции 01–05, в каждой схемы → карточки → самопроверка */
+:root{
+  --bg:#EDF1EE; --surface:#FFFFFF; --surface-2:#F5F8F6; --ink:#13201C; --muted:#56665F; --line:#D5DED9;
+  --accent:#0A7560; --accent-soft:#D9EEE7; --on-accent:#FFFFFF;
+  --must:#C2410C; --must-soft:#FCE6D8; --know:#9A5B05; --know-soft:#FAEFD3; --ref:#2F7A45; --ref-soft:#DFF0E2;
+  --code-bg:#E4ECE8; --code-ink:#0D3A2F; --term-bg:#0F1E19; --term-ink:#C8F3E4; --term-dim:#7FA99A;
+  --bad:#B42318; --bad-soft:#FDE4E1;
+  --f-display:"Unbounded","Onest",system-ui,sans-serif; --f-body:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0C1412; --surface:#131E1B; --surface-2:#172420; --ink:#E3EDE9; --muted:#93A69E; --line:#26362F;
+  --accent:#45CFAB; --accent-soft:#143A30; --on-accent:#06231B;
+  --must:#FF8B4E; --must-soft:#3A2116; --know:#F0C04B; --know-soft:#332910; --ref:#7FD08F; --ref-soft:#162E1C;
+  --code-bg:#1B2A25; --code-ink:#BDEFDD; --term-bg:#070F0C; --term-ink:#BDEFDD; --term-dim:#6E9486;
+  --bad:#FF7A6B; --bad-soft:#3A1A17; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0C1412; --surface:#131E1B; --surface-2:#172420; --ink:#E3EDE9; --muted:#93A69E; --line:#26362F;
+  --accent:#45CFAB; --accent-soft:#143A30; --on-accent:#06231B;
+  --must:#FF8B4E; --must-soft:#3A2116; --know:#F0C04B; --know-soft:#332910; --ref:#7FD08F; --ref-soft:#162E1C;
+  --code-bg:#1B2A25; --code-ink:#BDEFDD; --term-bg:#070F0C; --term-ink:#BDEFDD; --term-dim:#6E9486;
+  --bad:#FF7A6B; --bad-soft:#3A1A17; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);-webkit-font-smoothing:antialiased;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:780px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;letter-spacing:-.01em}
+p{margin:0}
+code,.mono{font-family:var(--f-mono);font-size:.86em}
+code{background:var(--code-bg);color:var(--code-ink);padding:.12em .4em;border-radius:6px;overflow-wrap:anywhere;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+b{font-weight:650}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
+
+/* hero */
+.hero{padding-block:28px 18px;display:grid;gap:14px}
+.eyebrow{font:600 12px/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.hero h1{font-size:clamp(30px,8vw,46px);line-height:1.05;font-weight:700}
+.hero p{color:var(--muted);max-width:56ch}
+.legend{display:flex;flex-wrap:wrap;gap:8px}
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+.seg{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px}
+.seg button{border:0;background:none;padding:7px 14px;border-radius:999px;font-weight:600;font-size:14px;cursor:pointer;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
+.counter{font-size:14px;color:var(--muted)}
+.counter b{color:var(--ink);font-variant-numeric:tabular-nums}
+.meter{height:6px;border-radius:9px;background:var(--line);overflow:hidden;width:120px;display:inline-block;vertical-align:middle;margin-left:8px}
+.meter i{display:block;height:100%;width:0;background:var(--accent);transition:width .4s}
+
+/* priority chips */
+.p{display:inline-flex;align-items:center;gap:6px;font:600 12px/1 var(--f-body);padding:5px 9px;border-radius:999px;white-space:nowrap}
+.p::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.p.must{background:var(--must-soft);color:var(--must)}
+.p.know{background:var(--know-soft);color:var(--know)}
+.p.ref{background:var(--ref-soft);color:var(--ref)}
+
+/* toc */
+.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;margin-bottom:8px;border-bottom:1px solid var(--line)}
+.toc ol{list-style:none;margin:0;padding:0;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.toc ol::-webkit-scrollbar{display:none}
+.toc a{display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--muted);font-weight:600;font-size:14px;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);white-space:nowrap}
+.toc a span{font:700 11px/1 var(--f-display);color:var(--accent)}
+.toc a.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.toc a.on span{color:var(--bg)}
+
+/* sections */
+section{padding-top:34px;scroll-margin-top:calc(env(safe-area-inset-top,0px) + 64px);display:grid;gap:16px}
+.sh{display:grid;gap:6px;padding-bottom:4px}
+.sh .no{font:700 13px/1 var(--f-display);color:var(--accent);letter-spacing:.08em}
+.sh h2{font-size:clamp(22px,5.6vw,30px);line-height:1.15;font-weight:700}
+.sh p{color:var(--muted)}
+.blk{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:grid;gap:12px;min-width:0}
+.bh{display:flex;align-items:center;justify-content:space-between;gap:8px 12px;flex-wrap:wrap}
+.bh h3{font-size:16px;font-weight:600;line-height:1.3}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+.grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}
+.grid.g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr))}
+.tile{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:12px;display:grid;gap:6px;align-content:start;min-width:0}
+.tile h4{margin:0;font-size:15px;font-weight:650;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tile p{font-size:14.5px;color:var(--muted)}
+.tip{font-size:14px;padding:8px 10px;border-radius:10px;background:var(--accent-soft);color:var(--ink)}
+.warn{font-size:14px;padding:8px 10px;border-radius:10px;background:var(--must-soft);color:var(--ink)}
+.soc{display:inline-block;font:700 10.5px/1 var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--must);margin-right:6px}
+ul.dots{margin:0;padding-left:18px;display:grid;gap:4px}
+ul.dots li::marker{color:var(--accent)}
+
+/* terminal tiles */
+.terms{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))}
+.term{background:var(--term-bg);color:var(--term-ink);border-radius:11px;padding:10px 12px;display:grid;gap:3px;min-width:0}
+.term .c{font:600 14px/1.35 var(--f-mono);overflow-wrap:anywhere}
+.term .c::before{content:"$ ";color:var(--term-dim)}
+.term.win .c::before{content:"> "}
+.term .d{font-size:13.5px;color:var(--term-dim);line-height:1.4}
+
+/* flows */
+.chain{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));counter-reset:ch}
+.chain .tile{position:relative}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:st}
+.steps li{counter-increment:st;display:grid;grid-template-columns:30px 1fr;gap:4px 12px;align-items:start}
+.steps li::before{content:counter(st);grid-row:span 3;width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--on-accent);font:700 13px/30px var(--f-display);text-align:center}
+.lane{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-weight:650;font-size:14.5px}
+.node{padding:3px 9px;border-radius:8px;background:var(--surface-2);border:1px solid var(--line);font-size:13.5px}
+.node.dc{border-color:var(--accent);color:var(--accent)}
+.arr{color:var(--accent);font-weight:700}
+.steps .what{font-size:14.5px}
+.steps .why{font-size:13.5px;color:var(--muted)}
+
+/* anatomy / scales */
+.anat{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch;font-family:var(--f-mono)}
+.anat div{display:grid;gap:4px;text-align:center}
+.anat b{font-size:18px;padding:8px 12px;border-radius:10px;background:var(--code-bg);color:var(--code-ink);font-weight:600}
+.anat span{font:500 12px/1.2 var(--f-body);color:var(--muted)}
+.anat .sep{font-size:18px;align-self:start;padding-top:8px;color:var(--muted)}
+.scale{display:grid;grid-template-columns:39fr 30fr 20fr 11fr;gap:3px;border-radius:10px;overflow:hidden}
+.scale div{padding:8px 6px;font-size:12.5px;font-weight:650;display:grid;gap:2px}
+.scale div span{font:500 11.5px/1 var(--f-mono);opacity:.85}
+.s1{background:var(--ref-soft);color:var(--ref)} .s2{background:var(--know-soft);color:var(--know)} .s3{background:var(--must-soft);color:var(--must)} .s4{background:var(--bad);color:var(--surface)}
+
+/* tree */
+.tree{background:var(--term-bg);color:var(--term-ink);border-radius:12px;padding:14px;font:14px/1.75 var(--f-mono);overflow-x:auto}
+.tree .row{display:grid;grid-template-columns:minmax(118px,auto) 1fr;gap:12px;white-space:nowrap}
+.tree .row span:last-child{font-family:var(--f-body);color:var(--term-dim);white-space:normal;font-size:13.5px;line-height:1.45;padding-top:3px}
+.tree .hl{color:#FFB27A}
+
+/* perms */
+.perm{display:flex;flex-wrap:wrap;gap:4px;font:600 20px/1 var(--f-mono)}
+.perm div{display:grid;gap:6px;text-align:center}
+.perm b{padding:9px 10px;border-radius:9px;font-weight:600;letter-spacing:.08em}
+.perm span{font:500 12px/1.2 var(--f-body);color:var(--muted)}
+.k0{background:var(--surface-2);border:1px solid var(--line)} .k1{background:var(--accent-soft);color:var(--accent)} .k2{background:var(--know-soft);color:var(--know)} .k3{background:var(--must-soft);color:var(--must)}
+
+/* cron */
+.cron{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;text-align:center}
+.cron b{font:600 17px/1 var(--f-mono);padding:10px 0;border-radius:9px;background:var(--code-bg);color:var(--code-ink)}
+.cron b.cmd{background:var(--accent);color:var(--on-accent);font-size:13px;display:grid;place-items:center}
+.cron span{font-size:11.5px;color:var(--muted);line-height:1.25;padding-top:5px;display:block}
+
+/* compare */
+.vs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:10px}
+.vs .tile h4{font-family:var(--f-display);font-size:15px}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:650}
+tr:last-child td{border-bottom:0}
+
+/* ladder */
+.ladder{display:grid;gap:6px}
+.rung{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:center;padding:10px 12px;border-radius:11px;border:1px solid var(--line);background:var(--surface-2)}
+.rung b{font-size:14.5px}
+.rung span{font-size:13.5px;color:var(--muted);grid-column:2}
+.rung i{grid-row:span 2;width:10px;align-self:stretch;border-radius:5px}
+.lv1 i{background:var(--bad)} .lv2 i{background:var(--must)} .lv3 i{background:var(--know)} .lv4 i{background:var(--ref)}
+
+/* events */
+.ev{display:grid;gap:6px}
+.ev div{display:grid;grid-template-columns:118px 1fr;gap:10px;align-items:center;font-size:14px}
+.ev b{padding:5px 9px;border-radius:8px;font-size:13px;text-align:center}
+.e1{background:var(--bad-soft);color:var(--bad)} .e2{background:var(--know-soft);color:var(--know)} .e3{background:var(--accent-soft);color:var(--accent)} .e4{background:var(--ref-soft);color:var(--ref)} .e5{background:var(--must-soft);color:var(--must)}
+
+/* chips row */
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips code,.ev code{white-space:nowrap}
+
+/* svg diagrams */
+.dg{width:100%;max-width:440px;height:auto;display:block;margin:0 auto}
+section,.blk{grid-template-columns:minmax(0,1fr)}
+section>*,.blk>*,.tile>*{min-width:0}
+.dg .bx{fill:var(--surface-2);stroke:var(--line);stroke-width:1.5}
+.dg .bx.ac{stroke:var(--accent);fill:var(--accent-soft)}
+.dg .t{fill:var(--ink);font:600 14px var(--f-body)}
+.dg .tm{fill:var(--muted);font:500 12px var(--f-body)}
+.dg .tmono{fill:var(--code-ink);font:600 13px var(--f-mono)}
+.dg .ln{stroke:var(--accent);stroke-width:2;fill:none}
+.dg .ln2{stroke:var(--must);stroke-width:2;fill:none;stroke-dasharray:6 5}
+.dg .ta{fill:var(--accent);font:650 12.5px var(--f-body)}
+.dg .tw{fill:var(--must);font:650 12.5px var(--f-body)}
+.dg .ha{fill:var(--accent)} .dg .hw{fill:var(--must)}
+
+/* self-check */
+.quiz{display:grid;gap:8px}
+.quiz-h{display:flex;align-items:center;gap:8px;font:700 13px/1 var(--f-display);letter-spacing:.06em;color:var(--accent);text-transform:uppercase;padding-top:4px}
+.q{border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden}
+.q.known{border-color:var(--accent)}
+.q-ask{width:100%;text-align:left;border:0;background:none;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer;font-weight:600;font-size:15px}
+.q-ask small{flex:none;font-size:12.5px;font-weight:600;color:var(--accent)}
+.q.known .q-ask small{color:var(--muted)}
+.q-ans{padding:0 14px 12px;display:grid;gap:10px;font-size:14.5px}
+.q-know{justify-self:start;border:1px solid var(--accent);background:none;color:var(--accent);border-radius:999px;padding:6px 12px;font-weight:650;font-size:13.5px;cursor:pointer}
+.q.known .q-know{background:var(--accent);color:var(--on-accent)}
+
+/* filter */
+body.only-must [data-p="know"], body.only-must [data-p="ref"]{display:none}
+footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:13.5px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header class="hero">
+  <a class="back" href="./">← SOC Path</a>
+  <div class="eyebrow">TryHackMe · Cyber Security 101</div>
+  <h1>Шпаргалка SEC1</h1>
+  <p>Главное из 5 тем: Search Skills, Linux, Windows, Active Directory, Kerberos и NetNTLM. Схемы вместо простыни, а в конце каждой темы карточки «проверь себя».</p>
+  <div class="legend"><span class="p must">учить наизусть</span><span class="p know">понимать</span><span class="p ref">справка</span></div>
+  <div class="controls">
+    <div class="seg" role="group" aria-label="Что показывать">
+      <button id="fAll" aria-pressed="true">Всё</button><button id="fMust" aria-pressed="false">Только главное</button>
+    </div>
+    <div class="counter">Знаю <b id="kn">0</b> из <b id="kt">0</b><span class="meter"><i id="km"></i></span></div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Темы"><ol>
+  <li><a href="#search"><span>01</span>Поиск</a></li>
+  <li><a href="#linux"><span>02</span>Linux</a></li>
+  <li><a href="#windows"><span>03</span>Windows</a></li>
+  <li><a href="#ad"><span>04</span>Active Directory</a></li>
+  <li><a href="#auth"><span>05</span>Kerberos и NTLM</a></li>
+</ol></nav>
+
+<!-- 01 SEARCH -->
+<section id="search">
+  <div class="sh"><span class="no">01</span><h2>Search Skills</h2><p>Где аналитик ищет информацию об угрозах и уязвимостях.</p></div>
+
+  <div class="grid">
+    <div class="tile" data-p="must"><h4>VirusTotal <span class="p must">каждый день</span></h4>
+      <p>70+ антивирусов в одном окне. Проверяет <b>файл, ссылку, домен, хэш</b>.</p>
+      <div class="tip">✅ Проверяй <b>по хэшу</b>, файл не загружай. Иначе документ компании окажется в общем доступе.</div>
+      <div class="warn">⚠️ 0 из 70 не значит «чисто». Вирус может быть новым.</div></div>
+    <div class="tile" data-p="know"><h4>Shodan <span class="p know">понимать</span></h4>
+      <p>«Google для серверов». Ищет устройства, открытые в интернет: серверы, камеры, роутеры.</p>
+      <div class="chips"><code>country:IE</code><code>port:22</code><code>org:</code><code>AS7224</code><code>hostname:</code></div>
+      <p class="small">Пример: <code>apache 2.4.1</code> → все серверы с этой версией. Плюс база CVE = список уязвимых.</p></div>
+    <div class="tile" data-p="know"><h4>GitHub <span class="p know">понимать</span></h4>
+      <p>Туда раньше всех выкладывают PoC и разборы. Ищи по номеру: <code>CVE-2026-1337</code>.</p>
+      <div class="warn">⚠️ Чужой PoC может быть сломан или сам оказаться вирусом. Читай код до запуска.</div></div>
+    <div class="tile" data-p="ref"><h4>Документация и man <span class="p ref">справка</span></h4>
+      <p>Официальные доки = самый надёжный источник. В терминале: <code>man nc</code>.</p></div>
+  </div>
+
+  <div class="blk" data-p="must">
+    <div class="bh"><h3>Уязвимость: от номера до эксплойта</h3><span class="p must">Security+</span></div>
+    <div class="chain">
+      <div class="tile"><h4>1 · CVE</h4><p>Номер уязвимости в мировом «словаре». Все говорят об одной и той же дыре.</p></div>
+      <div class="tile"><h4>2 · CVSS</h4><p>Оценка опасности от 0 до 10. Чем выше, тем срочнее чинить.</p></div>
+      <div class="tile"><h4>3 · PoC</h4><p>Код-доказательство, что дыра реально работает. Лежат на ExploitDB и GitHub.</p></div>
+    </div>
+    <div class="anat" aria-label="Устройство номера CVE">
+      <div><b>CVE</b><span>словарь</span></div><span class="sep">–</span>
+      <div><b>2025</b><span>год</span></div><span class="sep">–</span>
+      <div><b>55182</b><span>номер</span></div>
+    </div>
+    <p class="small muted">Громким дырам дают имена: <b>Heartbleed</b>, <b>Log4Shell</b>.</p>
+    <div class="scale" aria-label="Шкала CVSS">
+      <div class="s1">Low<span>0.1–3.9</span></div><div class="s2">Medium<span>4–6.9</span></div><div class="s3">High<span>7–8.9</span></div><div class="s4">Critical<span>9–10</span></div>
+    </div>
+    <p class="small muted">CVSS складывает два вопроса: <b>насколько легко атаковать</b> (сложность, нужен ли доступ) и <b>какой будет вред</b> (утечка, порча данных, остановка сервиса).</p>
+  </div>
+
+  <div class="quiz">
+    <div class="quiz-h">Проверь себя</div>
+    <div class="q" data-id="s1"><button class="q-ask" aria-expanded="false">Почему в VirusTotal лучше проверять хэш, а не сам файл?<small>ответ</small></button><div class="q-ans" hidden><p>Загруженный файл становится доступен другим. Хэш проверяет то же самое, но документ компании не утекает.</p><button class="q-know">Знаю ✓</button></div></div>
+    <div class="q" data-id="s2"><button class="q-ask" aria-expanded="false">Разбери номер CVE-2025-55182<small>ответ</small></button><div class="q-ans" hidden><p><b>CVE</b> = словарь уязвимостей, <b>2025</b> = год, <b>55182</b> = порядковый номер.</p><button class="q-know">Знаю ✓</button></div></div>
+    <div class="q" data-id="s3"><button class="q-ask" aria-expanded="false">Чем отличаются CVE, CVSS и PoC?<small>ответ</small></button><div class="q-ans" hidden><p>CVE: <b>что</b> за дыра. CVSS: <b>насколько</b> опасна (0–10). PoC: <b>доказательство</b>, что она работает.</p><button class="q-know">Знаю ✓</button></div></div>
+    <div class="q" data-id="s4" data-p="know"><button class="q-ask" aria-expanded="false">Что найдёт Shodan по запросу port:22 country:ES?<small>ответ</small></button><div class="q-ans" hidden><p>Устройства в Испании с открытым портом 22, то есть с доступным SSH.</p><button class="q-know">Знаю ✓</button></div></div>
+  </div>
+</section>
+
+<!-- 02 LINUX -->
+<section id="linux">
+  <div class="sh"><span class="no">02</span><h2>Основы Linux</h2><p>Терминал, папки, логи, права, процессы и автозапуск.</p></div>
+
+  <div class="blk" data-p="must">
+    <div class="bh"><h3>Главные команды</h3><span class="p must">наизусть</span></div>
+    <div class="terms">
+      <div class="term"><span class="c">whoami</span><span class="d">кто я сейчас</span></div>
+      <div class="term"><span class="c">pwd</span><span class="d">где я (текущая папка)</span></div>
+      <div class="term"><span class="c">ls -a</span><span class="d">что в папке, включая скрытые (с точкой). <b>-lh</b> подробно</span></div>
+      <div class="term"><span class="c">cd /home/tryhackme</span><span class="d">перейти в папку</span></div>
+      <div class="term"><span class="c">cat welcome</span><span class="d">показать файл</span></div>
+      <div class="term"><span class="c">echo "hello world"</span><span class="d">вывести текст</span></div>
+      <div class="term"><span class="c">find -name passwords.txt</span><span class="d">найти <b>файл</b> по имени</span></div>
+      <div class="term"><span class="c">grep "THM" access.log</span><span class="d">найти <b>текст внутри</b> файла. Главное для логов</span></div>
+      <div class="term"><span class="c">man ls · ls --help</span><span class="d">справка по команде. Выход: Ctrl+C или q</span></div>
+    </div>
+    <p class="small muted">Файлы: <code>touch</code> создать · <code>mkdir</code> папка · <code>cp</code> копия · <code>mv</code> переместить/переименовать · <code>rm</code> удалить · <code>rm -R</code> удалить папку</p>
+  </div>
+
+  <div class="blk" data-p="know">
+    <div class="bh"><h3>Операторы: связать команды</h3><span class="p know">понимать</span></div>
+    <div class="grid g3">
+      <div class="tile"><h4><code>&amp;</code> в фон</h4><p>Запустить и не ждать.</p></div>
+      <div class="tile"><h4><code>&amp;&amp;</code> потом</h4><p>Вторая команда после первой.</p></div>
+      <div class="tile"><h4><code>&gt;</code> перезаписать</h4><p>Старое содержимое <b>стирается</b>.</p></div>
+      <div class="tile"><h4><code>&gt;&gt;</code> дописать</h4><p>Добавить <b>в конец</b>, старое остаётся.</p></div>
+    </div>
+    <p class="tip">Запомни: одна стрелка <code>&gt;</code> стирает, две <code>&gt;&gt;</code> добавляют.</p>
+  </div>
+
+  <div class="blk" data-p="must">
+    <div class="bh"><h3>Карта папок Linux</h3><span class="p must">собеседования</span></div>
+    <div class="tree" role="img" aria-label="Дерево системных папок Linux">
+      <div class="row"><span>/</span><span>корень, отсюда начинается всё</span></div>
+      <div class="row"><span>├── etc/</span><span>настройки: <b>passwd</b> (пользователи), <b>shadow</b> (хэши паролей), <b>sudoers</b> (кому можно sudo)</span></div>
+      <div class="row"><span>├── var/</span><span>меняющиеся данные служб</span></div>
+      <div class="row"><span class="hl">│   └── log/</span><span>все логи системы ← здесь живёт SOC</span></div>
+      <div class="row"><span>├── root/</span><span>дом суперпользователя (не в /home!)</span></div>
+      <div class="row"><span>├── home/</span><span>папки обычных пользователей</span></div>
+      <div class="row"><span class="hl">└── tmp/</span><span>временная, чистится при перезагрузке. Писать может любой, поэтому сюда закидывают скрипты</span></div>
+    </div>
+  </div>
+
+  <div class="blk" data-p="must">
+    <div class="bh"><h3>Логи: главный хлеб SOC L1</h3><span class="p must">наизусть</span></div>
+    <div class="grid">
+      <div class="tile"><h4><code>apache2/access.log</code></h4><p>Каждый запрос к сайту: <b>кто, с какого IP, какой файл</b>.</p></div>
+      <div class="tile"><h4><code>apache2/error.log</code></h4><p>Ошибки веб-сервера.</p></div>
+      <div class="tile"><h4><code>fail2ban.log</code></h4><p>Попытки подбора паролей (<i>brute force</i>).</p></div>
+      <div class="tile"><h4><code>ufw.log</code></h4><p>Фаервол: что пропущено, что заблокировано.</p></div>
+    </div>
+    <p class="small muted">Всё лежит в <code>/var/log</code>. Старые логи архивируются (<b>ротация</b>): появляются <code>.1</code> и <code>.2.gz</code>. Там же входы в систему (<i>authentication attempts</i>).</p>
+  </div>
+
+  <div class="blk" data-p="must">
+    <div class="bh"><h3>Права доступа: читаем <code>ls -l</code></h3><span class="p must">наизусть</span></div>
+    <div class="perm" aria-label="Разбор строки прав -rwxr-x---">
+      <div><b class="k0">-</b><span>файл</span></div>
+      <div><b class="k1">rwx</b><span>владелец</span></div>
+      <div><b class="k2">r-x</b><span>группа</span></div>
+      <div><b class="k3">---</b><span>остальные</span></div>
+    </div>
+    <p class="small"><b>r</b> Read читать · <b>w</b> Write изменять · <b>x</b> Execute запускать</p>
+    <div class="terms">
+      <div class="term"><span class="c">su -l имя</span><span class="d">стать другим пользователем (нужен его пароль, root не спрашивают)</span></div>
+      <div class="term"><span class="c">ssh логин@IP</span><span class="d">зашифрованный вход на удалённый Linux. Пароль при вводе не виден</span></div>
+    </div>
+  </div>
+
+  <div class="blk" data-p="know">
+    <div class="bh"><h3>Передача файлов между машинами</h3><span class="p know">понимать</span></div>
+    <svg class="dg" viewBox="0 0 360 260" role="img" aria-label="Схема передачи файла: машина A раздаёт файл через python http.server, машина B скачивает его через wget">
+      <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ha" d="M0 0L10 5L0 10z"/></marker></defs>
+      <rect class="bx ac" x="10" y="10" width="340" height="80" rx="12"/>
+      <text class="t" x="26" y="36">Машина A · раздаёт</text>
+      <text class="tmono" x="26" y="60">python3 -m http.server</text>
+      <text class="tm" x="26" y="80">порт 8000</text>
+      <path class="ln" d="M120 166 V98" marker-end="url(#ah)"/><text class="ta" x="132" y="136">запрос</text>
+      <path class="ln" d="M240 94 V162" marker-end="url(#ah)"/><text class="ta" x="252" y="136">файл</text>
+      <rect class="bx" x="10" y="170" width="340" height="80" rx="12"/>
+      <text class="t" x="26" y="196">Машина B · забирает</text>
+      <text class="tmono" x="26" y="222">wget http://IP:8000/файл</text>
+    </svg>
+    <p class="small"><code>scp ОТКУДА КУДА</code>: копия через SSH, с шифрованием и паролем. <br><code>scp important.txt ubuntu@192.168.1.30:/home/ubuntu/</code></p>
+  </div>
+
+  <div class="blk" data-p="must">
+    <div class="bh"><h3>Процессы и службы</h3><span class="p must">наизусть</span></div>
+    <p class="small"><b>PID</b> = номер процесса. Самый первый, <b>PID 1</b>, это <code>systemd</code>: он запускает все остальные службы.</p>
+    <div class="terms">
+      <div class="term"><span class="c">ps</span><span class="d">процессы твоей сессии</span></div>
+      <div class="term"><span class="c">ps aux</span><span class="d">все процессы всех пользователей</span></div>
+      <div class="term"><span class="c">top</span><span class="d">живая статистика</span></div>
+      <div class="term"><span class="c">kill &lt;PID&gt;</span><span class="d">отправить процессу сигнал</span></div>
+    </div>
+    <div class="grid g3">
+      <div class="tile"><h4>SIGTERM</h4><p>Вежливо: «заверши работу и убери за собой».</p></div>
+      <div class="tile"><h4>SIGKILL</h4><p>Жёстко: убить сразу, без уборки.</p></div>
+      <div class="tile"><h4>SIGSTOP</h4><p>Пауза.</p></div>
+    </div>
+    <p class="small"><code>&amp;</code> или <b>Ctrl+Z</b> отправить в фон · <code>fg</code> вернуть обратно</p>
+    <p class="small"><code>systemctl start | stop | enable | disable | status сервис</code> · <b>enable</b> = добавить в автозапуск</p>
+  </div>
+
+  <div class="blk" data-p="must">
+    <div class="bh"><h3>Cron: задачи по расписанию</h3><span class="p must">наизусть</span></div>
+    <div class="cron" aria-label="Шесть полей crontab: минута, час, день месяца, месяц, день недели, команда">
+      <div><b>0</b><span>MIN<br>минута</span></div>
+      <div><b>*/12</b><span>HOUR<br>час</span></div>
+      <div><b>*</b><span>DOM<br>день мес.</span></div>
+      <div><b>*</b><span>MON<br>месяц</span></div>
+      <div><b>*</b><span>DOW<br>день нед.</span></div>
+      <div><b class="cmd">CMD</b><span>команда</span></div>
+    </div>
+    <p class="small">Пример выше = <b>каждые 12 часов</b>. <code>*</code> значит «любое значение». Открыть: <code>crontab -e</code>, посмотреть: <code>crontab -l</code>.</p>
+    <div class="warn"><span class="soc">SOC</span><code>@reboot</code> запускает команду при каждом включении. Хакеры так закрепляются в системе (<i>persistence</i>). Подозрительная строка в crontab = повод копать.</div>
+  </div>
+
+  <div class="blk" data-p="ref">
+    <div class="bh"><h3>Редакторы и пакеты</h3><span class="p ref">справка</span></div>
+    <ul class="dots small">
+      <li><code>nano файл</code> простой (<code>^</code> = Ctrl, выход Ctrl+X) · <code>vim</code> сложнее, но есть везде</li>
+      <li><code>apt update</code> обновить список · <code>apt install</code> поставить · <code>apt remove</code> удалить</li>
+      <li>Репозитории: <code>/etc/apt/sources.list</code>. <b>GPG-ключи</b> проверяют, что программа настоящая и не подменена (Security+)</li>
+    </ul>
+  </div>
+
+  <div class="quiz">
+    <div class="quiz-h">Проверь себя</div>
+    <div class="q" data-id="l1"><button class="q-ask" aria-expanded="false">Чем find отличается от grep?<small>ответ</small></button><div class="q-ans" hidden><p><b>find</b> ищет файл по имени. <b>grep</b> ищет текст внутри файла.</p><button class="q-know">Знаю ✓</button></div></div>
+    <div class="q" data-id="l2"><button class="q-ask" aria-expanded="false">Где лежат логи и что в access.log?<small>ответ</small></button><div class="q-ans" hidden><p>В <code>/var/log</code>. В <code>apache2/access.log</code> каждый запрос к сайту: IP, время, какой файл открыли.</p><button class="q-know">Знаю ✓</button></div></div>
+    <div class="q" data-id="l3"><button class="q-ask" aria-expanded="false">Что хранится в /etc/shadow?<small>ответ</small></button><div class="q-ans" hidden><p>Хэши паролей пользователей. В <code>/etc/passwd</code> сами пользователи, в <code>/etc/sudoers</code> кому можно sudo.</p><button class="q-know">Знаю ✓</button></div></div>
+    <div class="q" data-id="l4"><button class="q-ask" aria-expanded="false">Почему /tmp подозрительная папка?<small>ответ</small></button><div class="q-ans" hidden><p>Писать туда может любой пользователь, поэтому атакующие часто кладут туда свои скрипты.</p><button class="q-know">Знаю ✓</button></div></div>
+    <div class="q" data-id="l5"><button class="q-ask" aria-expanded="false">SIGTERM или SIGKILL: какой «вежливый»?<small>ответ</small></button><div class="q-ans" hidden><p><b>SIGTERM</b> даёт процессу убрать за собой. <b>SIGKILL</b> убивает сразу.</p><button class="q-know">Знаю ✓</button></div></div>
+    <div class="q" data-id="l6"><button class="q-ask" aria-expanded="false">Расшифруй права r-x<small>ответ</small></button><div class="q-ans" hidden><p>Читать можно, менять нельзя, запускать можно.</p><button class="q-know">Знаю ✓</button></div></div>
+    <div class="q" data-id="l7"><button class="q-ask" aria-expanded="false">Что значит 0 */12 * * * в crontab?<small>ответ</small></button><div class="q-ans" hidden><p>Запуск в 0 минут каждые 12 часов, в любой день, месяц и день недели.</p><button class="q-know">Знаю ✓</button></div></div>
+    <div class="q" data-id="l8" data-p="know"><button class="q-ask" aria-expanded="false">Чем &gt; отличается от &gt;&gt;?<small>ответ</small></button><div class="q-ans" hidden><p><code>&gt;</code> перезаписывает файл, <code>&gt;&gt;</code> дописывает в конец.</p><button class="q-know">Знаю ✓</button></div></div>
+  </div>
+</section>
+
+<!-- 03 WINDOWS -->
+<section id="windows">
+  <div class="sh"><span class="no">03</span><h2>Основы Windows</h2><p>Файловая система, журналы событий, команды и встроенная защита.</p></div>
+
+  <div class="blk" data-p="must">
+    <div class="bh"><h3>NTFS и скрытые потоки ADS</h3><span class="p must">наизусть</span></div>
+    <p class="small"><b>NTFS</b> = файловая система Windows. Журналируемая (после сбоя восстанавливается сама), файлы больше 4 ГБ, права доступа, сжатие, шифрование <b>EFS</b>. До неё были FAT16/FAT32 и HPFS.</p>
+    <p class="small muted">Права (ПКМ → Свойства → Безопасность): Full control · Modify · Read &amp; Execute · List folder contents · Read · Write</p>
+    <svg class="dg" viewBox="0 0 360 196" role="img" aria-label="У файла есть основной поток данных и может быть скрытый дополнительный поток">
+      <rect class="bx" x="10" y="10" width="340" height="44" rx="10"/>
+      <text class="t" x="26" y="38">report.docx</text>
+      <text class="tm" x="336" y="38" text-anchor="end">так видит Проводник</text>
+      <path class="ln" d="M24 54 V102 H40"/><path class="ln2" d="M24 102 V162 H40"/>
+      <rect class="bx ac" x="40" y="80" width="310" height="44" rx="10"/>
+      <text class="tmono" x="56" y="107">$DATA</text><text class="tm" x="124" y="107">основной поток</text>
+      <rect class="bx" x="40" y="140" width="310" height="44" rx="10" style="stroke:var(--must);stroke-dasharray:6 5"/>
+      <text class="tmono" x="56" y="167" style="fill:var(--must)">:hidden</text><text class="tm" x="124" y="167">скрытый, виден в PowerShell</text>
+    </svg>
+    <div class="warn"><span class="soc">SOC</span>Вредоносы прячут данные в ADS. Обычное применение: метка «файл скачан из интернета».</div>
+    <p class="small">Папка ОС: <code>%windir%</code> = <code>C:\Windows</code>. Внутри <code>System32</code>: критичные файлы, удалять нельзя.</p>
+  </div>
+
+  <div class="blk" data-p="must">
+    <div class="bh"><h3>Event Viewer: журнал всех событий</h3><span class="p must">наизусть</span></div>
+    <div class="ev">
+      <div><b class="e1">Error</b><span>серьёзный сбой</span></div>
+      <div><b class="e2">Warning</b><span>возможная проблема</span></div>
+      <div><b class="e3">Information</b><span>служба или драйвер отработали нормально</span></div>
+      <div><b class="e4">Success Audit</b><span>успешная проверка, например вход</span></div>
+      <div><b class="e5">Failure Audit</b><span>неудачная попытка доступа</span></div>
+    </div>
+    <div class="grid g3">
+      <div class="tile"><h4>Security</h4><p>входы, файлы, доступ к ресурсам. Главный для SOC</p></div>
+      <div class="tile"><h4>System</h4><p>события ОС и драйверов</p></div>
+      <div class="tile"><h4>Application</h4><p>события программ</p></div>
+    </div>
+  </div>
+
+  <div class="blk" data-p="know">
+    <div class="bh"><h3>Другие важные разделы</h3><span class="p know">понимать</span></div>
+    <div class="grid">
+      <div class="tile"><h4>Task Scheduler</h4><p>Запуск программ по расписанию или событию (вход, загрузка, каждые 5 минут).</p></div>
+      <div class="tile"><h4>Services</h4><p>Фоновые программы: <b>Automatic</b> (со стартом ОС), <b>Manual</b>, <b>Disabled</b>.</p></div>
+      <div class="tile"><h4>WMI</h4><p>Управление Windows скриптами, в том числе удалённо. Утилита <code>WMIC</code> устарела, вместо неё PowerShell.</p></div>
+      <div class="tile"><h4>Shared Folders</h4><p>Сетевые папки, включая скрытые админские: <code>ADMIN$</code> <code>C$</code> <code>IPC$</code>. Видно, кто подключён.</p></div>
+      <div class="tile"><h4>Реестр <code>regedit</code></h4><p>База всех настроек. Ветки: <code>HKCR</code> <code>HKCU</code> <code>HKLM</code> <code>HKU</code> <code>HKCC</code>. Ошибка может сломать систему.</p></div>
+      <div class="tile"><h4><code>resmon.exe</code></h4><p>Нагрузка в реальном времени: ЦП, Память, Диск, Сеть. Во вкладке «Сеть» открытые порты.</p></div>
+    </div>
+  </div>
+
+  <div class="blk" data-p="must">
+    <div class="bh"><h3>Команды CMD</h3><span class="p must">наизусть</span></div>
+    <div class="terms">
+      <div class="term win"><span class="c">hostname · whoami</span><span class="d">имя компьютера · кто я</span></div>
+      <div class="term win"><span class="c">ipconfig /all</span><span class="d">сеть: IP, маска, шлюз, подробно</span></div>
+      <div class="term win"><span class="c">netstat -a -b -n -o</span><span class="d">все соединения, программы, номера, PID</span></div>
+      <div class="term win"><span class="c">net user · localgroup · share</span><span class="d">учётки, группы, общие папки (ещё use, session)</span></div>
+      <div class="term win"><span class="c">net help user</span><span class="d">справка для net (ключ /? не работает)</span></div>
+      <div class="term win"><span class="c">cls · команда /?</span><span class="d">очистить экран · справка</span></div>
+    </div>
+  </div>
+
+  <div class="blk" data-p="must">
+    <div class="bh"><h3>Win + R: быстрый запуск</h3><span class="p must">наизусть</span></div>
+    <div class="tbl"><table>
+      <tr><th>Ввести</th><th>Что откроется</th></tr>
+      <tr><td><code>compmgmt.msc</code></td><td>Управление компьютером: события, задачи, службы, папки, диски</td></tr>
+      <tr><td><code>lusrmgr.msc</code></td><td>Локальные пользователи и группы</td></tr>
+      <tr><td><code>WF.msc</code></td><td>Брандмауэр</td></tr>
+      <tr><td><code>msconfig</code></td><td>Настройка системы (нужен админ)</td></tr>
+      <tr><td><code>taskmgr</code></td><td>Диспетчер задач</td></tr>
+      <tr><td><code>msinfo32.exe</code></td><td>Сведения о системе</td></tr>
+      <tr><td><code>resmon.exe</code> · <code>perfmon</code></td><td>Монитор ресурсов · производительности</td></tr>
+      <tr><td><code>control.exe</code></td><td>Панель управления</td></tr>
+    </table></div>
+  </div>
+
+  <div class="blk" data-p="must">
+    <div class="bh"><h3>Встроенная защита Windows</h3><span class="p must">Security+</span></div>
+    <div class="grid">
+      <div class="tile"><h4>Defender</h4><p>Антивирус. Угрозы уходят в <b>карантин</b>. Защита в реальном времени блокирует запуск.</p></div>
+      <div class="tile"><h4>Controlled folder access</h4><p>Защита от вымогателей (<i>ransomware</i>): менять папки могут только доверенные программы.</p></div>
+      <div class="tile"><h4>Exclusions</h4><p>Что антивирус не проверяет. Добавлять опасно, только при 100% уверенности.</p></div>
+      <div class="tile"><h4>Firewall: 3 профиля</h4><p><b>Domain</b> (сеть компании) · <b>Private</b> (дом) · <b>Public</b> (кафе, аэропорт, по умолчанию)</p></div>
+      <div class="tile"><h4>Memory integrity</h4><p>Изоляция ядра: вредонос не пролезет в важные процессы.</p></div>
+      <div class="tile"><h4>TPM</h4><p>Отдельный чип для шифрования. Вредонос не может его изменить.</p></div>
+    </div>
+    <div class="warn"><span class="soc">SOC</span><b>VSS</b> (теневые копии) хранит резервные снимки диска. Вымогатели первым делом <b>удаляют теневые копии</b>, чтобы жертва не восстановила файлы.</div>
+    <p class="small muted">Статусы Windows Security: зелёный = защищено, жёлтый = есть совет, красный = срочно.</p>
+  </div>
+
+  <div class="blk" data-p="ref">
+    <div class="bh"><h3>Мелочи</h3><span class="p ref">справка</span></div>
+    <ul class="dots small">
+      <li>Автозагрузка: Windows 10/11 через <code>taskmgr</code>, Server через <code>shell:startup</code></li>
+      <li>Переменные среды: <code>%windir%</code>, <code>ComSpec</code> = <code>%SystemRoot%\system32\cmd.exe</code></li>
+      <li>Файл подкачки = виртуальная память. При «синем экране» пишется дамп <code>%SystemRoot%\MEMORY.DMP</code></li>
+    </ul>
+  </div>
+
+  <div class="quiz">
+    <div class="quiz-h">Проверь себя</div>
+    <div class="q" data-id="w1"><button class="q-ask" aria-expanded="false">Что такое ADS и почему это важно для SOC?<small>ответ</small></button><div class="q-ans" hidden><p>Скрытый дополнительный поток данных у файла в NTFS. Проводник его не видит, поэтому вредоносы прячут там данные.</p><button class="q-know">Знаю ✓</button></div></div>
+    <div class="q" data-id="w2"><button class="q-ask" aria-expanded="false">Назови 5 типов событий в Event Viewer<small>ответ</small></button><div class="q-ans" hidden><p>Error, Warning, Information, Success Audit, Failure Audit.</p><button class="q-know">Знаю ✓</button></div></div>
+    <div class="q" data-id="w3"><button class="q-ask" aria-expanded="false">В каком журнале искать неудачные входы?<small>ответ</small></button><div class="q-ans" hidden><p>В журнале <b>Security</b>, тип события Failure Audit.</p><button class="q-know">Знаю ✓</button></div></div>
+    <div class="q" data-id="w4"><button class="q-ask" aria-expanded="false">Какая команда покажет все соединения и PID процессов?<small>ответ</small></button><div class="q-ans" hidden><p><code>netstat -a -n -o</code> (с <code>-b</code> ещё и имя программы).</p><button class="q-know">Знаю ✓</button></div></div>
+    <div class="q" data-id="w5"><button class="q-ask" aria-expanded="false">Зачем вымогатели удаляют VSS?<small>ответ</small></button><div class="q-ans" hidden><p>Теневые копии позволяют восстановить файлы. Без них жертве остаётся платить выкуп или искать внешний бэкап.</p><button class="q-know">Знаю ✓</button></div></div>
+    <div class="q" data-id="w6"><button class="q-ask" aria-expanded="false">Что откроет lusrmgr.msc?<small>ответ</small></button><div class="q-ans" hidden><p>Локальных пользователей и группы.</p><button class="q-know">Знаю ✓</button></div></div>
+    <div class="q" data-id="w7" data-p="know"><button class="q-ask" aria-expanded="false">Что такое C$ и ADMIN$?<small>ответ</small></button><div class="q-ans" hidden><p>Скрытые административные общие папки. Видны в Shared Folders.</p><button class="q-know">Знаю ✓</button></div></div>
+  </div>
+</section>
+
+<!-- 04 AD -->
+<section id="ad">
+  <div class="sh"><span class="no">04</span><h2>Active Directory</h2><p>Как компания управляет сотнями компьютеров и сотрудников из одного места.</p></div>
+
+  <div class="blk" data-p="must">
+    <div class="bh"><h3>Главная идея на одной схеме</h3><span class="p must">наизусть</span></div>
+    <svg class="dg" viewBox="0 0 360 290" role="img" aria-label="Домен: контроллер домена с базой Active Directory, к нему подключены сотрудники, компьютеры и ресурсы">
+      <rect class="bx" x="4" y="4" width="352" height="282" rx="16" style="fill:none;stroke-dasharray:7 6"/>
+      <text class="tm" x="18" y="26">ДОМЕН thm.local</text>
+      <rect class="bx ac" x="60" y="42" width="240" height="92" rx="14"/>
+      <text class="t" x="180" y="70" text-anchor="middle">Контроллер домена (DC)</text>
+      <text class="tmono" x="180" y="94" text-anchor="middle">AD DS</text>
+      <text class="tm" x="180" y="116" text-anchor="middle">все учётки и хэши паролей</text>
+      <path class="ln" d="M68 206 L130 134"/><path class="ln" d="M180 206 V134"/><path class="ln" d="M292 206 L230 134"/>
+      <rect class="bx" x="16" y="206" width="104" height="60" rx="10"/><text class="t" x="68" y="241" text-anchor="middle">Люди</text>
+      <rect class="bx" x="128" y="206" width="104" height="60" rx="10"/><text class="t" x="180" y="241" text-anchor="middle">ПК</text>
+      <rect class="bx" x="240" y="206" width="104" height="60" rx="10"/><text class="t" x="292" y="241" text-anchor="middle">Принтеры</text>
+    </svg>
+    <div class="grid g3">
+      <div class="tile"><h4>Домен</h4><p>Все пользователи и ПК компании под общим управлением.</p></div>
+      <div class="tile"><h4>Active Directory</h4><p>Общая база учёток. Вход на любом ПК: <code>THM\Administrator</code></p></div>
+      <div class="tile"><h4>DC</h4><p>Сервер, где работает AD.</p></div>
+    </div>
+    <div class="warn"><span class="soc">SOC</span>DC = самая ценная цель в сети. На нём хэши паролей <b>всех</b> пользователей домена.</div>
+  </div>
+
+  <div class="blk" data-p="must">
+    <div class="bh"><h3>Кто живёт в AD</h3><span class="p must">наизусть</span></div>
+    <div class="grid g3">
+      <div class="tile"><h4>Users</h4><p><b>Люди</b> (сотрудники) и <b>сервисные</b> учётки для служб вроде IIS, MSSQL.</p></div>
+      <div class="tile"><h4>Computers</h4><p>Учётка с паролем из ~120 символов. Узнаёшь по <b>$</b>: ПК <code>DC01</code> → <code>DC01$</code></p></div>
+      <div class="tile"><h4>Security Groups</h4><p>Выдать права сразу пачке людей, а не каждому.</p></div>
+    </div>
+    <p class="small muted">Всех их называют <b>Security Principals</b>: они могут входить и получать права.</p>
+  </div>
+
+  <div class="blk" data-p="must">
+    <div class="bh"><h3>Лестница групп: от всемогущих к обычным</h3><span class="p must">SOC</span></div>
+    <div class="ladder">
+      <div class="rung lv1"><i></i><b>Enterprise Admins</b><span>Админы над <b>всеми</b> доменами леса. Выше Domain Admins</span></div>
+      <div class="rung lv1"><i></i><b>Domain Admins</b><span>Полный контроль над доменом и DC</span></div>
+      <div class="rung lv2"><i></i><b>Backup Operators</b><span>Читают любые файлы в обход прав (для бэкапов)</span></div>
+      <div class="rung lv3"><i></i><b>Server Operators · Account Operators</b><span>Управляют DC (без админских групп) · создают и меняют учётки</span></div>
+      <div class="rung lv4"><i></i><b>Domain Users · Domain Computers</b><span>Все пользователи · все компьютеры домена</span></div>
+    </div>
+  </div>
+
+  <div class="blk" data-p="must">
+    <div class="bh"><h3>OU или Группа? Частая путаница</h3><span class="p must">наизусть</span></div>
+    <div class="vs">
+      <div class="tile"><h4>📁 OU (папка)</h4><ul class="dots small"><li>Для <b>политик и настроек</b> (GPO)</li><li>Обычно = отдел: IT, Sales, HR</li><li>Пользователь только в <b>одной</b> OU</li></ul></div>
+      <div class="tile"><h4>👥 Группа</h4><ul class="dots small"><li>Для <b>доступа к ресурсам</b>: папки, принтеры</li><li>Не зависит от отдела</li><li>Пользователь во <b>многих</b> группах</li></ul></div>
+    </div>
+    <p class="small"><b>Делегирование</b>: дать права на одну OU обычному сотруднику. Например, техподдержка сбрасывает пароли отделу продаж, но не становится Domain Admin.</p>
+    <p class="small muted">OU защищены от удаления. Чтобы удалить: View → Advanced Features → снять галочку в свойствах.</p>
+  </div>
+
+  <div class="blk" data-p="know">
+    <div class="bh"><h3>Как раскладывать компьютеры</h3><span class="p know">понимать</span></div>
+    <div class="grid g3">
+      <div class="tile"><h4>Workstations</h4><p>ПК сотрудников. Админам сюда входить нельзя!</p></div>
+      <div class="tile"><h4>Servers</h4><p>Дают сервисы людям и другим серверам.</p></div>
+      <div class="tile"><h4>Domain Controllers</h4><p>Своя отдельная системная OU.</p></div>
+    </div>
+    <p class="small muted">Новые ПК сначала падают в контейнер <code>Computers</code>.</p>
+  </div>
+
+  <div class="blk" data-p="must">
+    <div class="bh"><h3>GPO: правила для всех сразу</h3><span class="p must">Security+</span></div>
+    <ol class="steps">
+      <li><span class="lane">Создаёшь GPO</span><span class="what">Набор правил: «пароль от 10 символов», «блокировка экрана через 5 минут».</span><span class="why">Внутри две части: Computer Configuration и User Configuration.</span></li>
+      <li><span class="lane">Привязываешь к домену или OU</span><span class="what">Правило наследуют все вложенные OU.</span><span class="why">Security Filtering сужает круг (по умолчанию Authenticated Users).</span></li>
+      <li><span class="lane">Раздача через <code>SYSVOL</code></span><span class="what">Общая папка на каждом DC: <code>C:\Windows\SYSVOL\sysvol\</code></span><span class="why">Читать её могут все пользователи домена.</span></li>
+      <li><span class="lane">ПК подтягивают правила</span><span class="what">Сами примерно раз в 2 часа.</span><span class="why">Сразу: <code>gpupdate /force</code></span></li>
+    </ol>
+  </div>
+
+  <div class="blk" data-p="must">
+    <div class="bh"><h3>Деревья, леса и трасты</h3><span class="p must">наизусть</span></div>
+    <svg class="dg" viewBox="0 0 360 330" role="img" aria-label="Лес из двух деревьев: thm.local с поддоменами uk и us, и mht.local">
+      <rect class="bx" x="4" y="4" width="352" height="322" rx="16" style="fill:none;stroke-dasharray:7 6"/>
+      <text class="tm" x="18" y="26">ЛЕС: разные имена, одна сеть</text>
+      <rect class="bx" x="16" y="40" width="328" height="166" rx="12" style="fill:none"/>
+      <text class="tm" x="30" y="62">ДЕРЕВО: одно пространство имён</text>
+      <rect class="bx ac" x="115" y="74" width="130" height="38" rx="9"/><text class="tmono" x="180" y="98" text-anchor="middle">thm.local</text>
+      <path class="ln" d="M155 112 L100 150"/><path class="ln" d="M205 112 L260 150"/>
+      <rect class="bx" x="26" y="150" width="148" height="38" rx="9"/><text class="tmono" x="100" y="174" text-anchor="middle">uk.thm.local</text>
+      <rect class="bx" x="186" y="150" width="148" height="38" rx="9"/><text class="tmono" x="260" y="174" text-anchor="middle">us.thm.local</text>
+      <rect class="bx ac" x="115" y="232" width="130" height="38" rx="9"/><text class="tmono" x="180" y="256" text-anchor="middle">mht.local</text>
+      <text class="tm" x="180" y="294" text-anchor="middle">второе дерево: купленная компания</text>
+    </svg>
+    <p class="small"><b>Траст</b> = мостик доверия между доменами. Двусторонний создаётся сам внутри дерева и леса.</p>
+    <svg class="dg" viewBox="0 0 360 170" role="img" aria-label="Односторонний траст: домен AAA доверяет BBB, поэтому пользователи BBB получают доступ к AAA">
+      <defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ha" d="M0 0L10 5L0 10z"/></marker>
+      <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="hw" d="M0 0L10 5L0 10z"/></marker></defs>
+      <rect class="bx ac" x="10" y="30" width="90" height="84" rx="12"/><text class="tmono" x="55" y="77" text-anchor="middle">AAA</text>
+      <rect class="bx" x="260" y="30" width="90" height="84" rx="12"/><text class="tmono" x="305" y="77" text-anchor="middle">BBB</text>
+      <path class="ln" d="M106 52 H252" marker-end="url(#ah2)"/><text class="ta" x="180" y="42" text-anchor="middle">доверяет</text>
+      <path class="ln2" d="M254 94 H108" marker-end="url(#ah3)"/><text class="tw" x="180" y="114" text-anchor="middle">доступ</text>
+      <text class="tm" x="180" y="152" text-anchor="middle">пользователи BBB → ресурсы AAA</text>
+    </svg>
+    <div class="tip">Доверие и доступ идут <b>в разные стороны</b>. И траст сам по себе не открывает файлы: он только позволяет выдать права.</div>
+  </div>
+
+  <div class="quiz">
+    <div class="quiz-h">Проверь себя</div>
+    <div class="q" data-id="a1"><button class="q-ask" aria-expanded="false">Почему DC главная цель атакующих?<small>ответ</small></button><div class="q-ans" hidden><p>На нём хранятся хэши паролей всех пользователей домена.</p><button class="q-know">Знаю ✓</button></div></div>
+    <div class="q" data-id="a2"><button class="q-ask" aria-expanded="false">Учётка заканчивается на $. Кто это?<small>ответ</small></button><div class="q-ans" hidden><p>Компьютер. Например, <code>DC01$</code> = учётка машины DC01.</p><button class="q-know">Знаю ✓</button></div></div>
+    <div class="q" data-id="a3"><button class="q-ask" aria-expanded="false">OU или группа: что нужно, чтобы дать доступ к принтеру?<small>ответ</small></button><div class="q-ans" hidden><p><b>Группа</b>. OU нужна для политик (GPO), группа для доступа к ресурсам.</p><button class="q-know">Знаю ✓</button></div></div>
+    <div class="q" data-id="a4"><button class="q-ask" aria-expanded="false">Как применить новую GPO прямо сейчас?<small>ответ</small></button><div class="q-ans" hidden><p><code>gpupdate /force</code>. Иначе ПК подтянут её сами примерно за 2 часа.</p><button class="q-know">Знаю ✓</button></div></div>
+    <div class="q" data-id="a5"><button class="q-ask" aria-expanded="false">Кто выше: Domain Admins или Enterprise Admins?<small>ответ</small></button><div class="q-ans" hidden><p><b>Enterprise Admins</b>: они управляют всеми доменами леса.</p><button class="q-know">Знаю ✓</button></div></div>
+    <div class="q" data-id="a6"><button class="q-ask" aria-expanded="false">AAA доверяет BBB. Кто к кому получает доступ?<small>ответ</small></button><div class="q-ans" hidden><p>Пользователи <b>BBB</b> заходят к ресурсам <b>AAA</b>. Доступ идёт против направления доверия.</p><button class="q-know">Знаю ✓</button></div></div>
+  </div>
+</section>
+
+<!-- 05 AUTH -->
+<section id="auth">
+  <div class="sh"><span class="no">05</span><h2>Kerberos и NetNTLM</h2><p>Как сервер узнаёт, что ты это ты, если твой пароль знает только контроллер домена.</p></div>
+
+  <div class="vs" data-p="must">
+    <div class="tile"><h4>🎟 Kerberos</h4><p>Современный, стоит <b>по умолчанию</b>. Работает на <b>билетах</b>.</p></div>
+    <div class="tile"><h4>🔄 NetNTLM</h4><p>Устаревший, для совместимости. Работает по схеме <b>загадка → ответ</b>.</p></div>
+  </div>
+
+  <div class="blk" data-p="must">
+    <div class="bh"><h3>Kerberos = парк аттракционов</h3><span class="p must">наизусть</span></div>
+    <p class="small muted">Домен = парк. <b>KDC</b> на контроллере домена = главная касса. Паспорт (пароль) показываешь один раз, дальше ходишь по билетам.</p>
+    <ol class="steps">
+      <li><span class="lane"><span class="node">Ты</span><span class="arr">→</span><span class="node dc">KDC</span></span>
+        <span class="what">Отправляешь имя и время, зашифрованные твоим паролем. Получаешь <b>TGT</b> (главный браслет) и <b>ключ сессии</b>.</span>
+        <span class="why">TGT запечатан хэшем учётки <code>krbtgt</code>: ты не можешь его открыть или подделать.</span></li>
+      <li><span class="lane"><span class="node">Ты</span><span class="arr">→</span><span class="node dc">KDC</span></span>
+        <span class="what">Показываешь TGT и называешь нужный сервис (<b>SPN</b>, например <code>MSSQL/SRV</code>). Получаешь <b>TGS</b>: билет на этот аттракцион.</span>
+        <span class="why">Пароль больше не вводишь. TGS запечатан хэшем владельца сервиса.</span></li>
+      <li><span class="lane"><span class="node">Ты</span><span class="arr">→</span><span class="node">Сервис</span></span>
+        <span class="what">Отдаёшь TGS. Сервис открывает его своим ключом и пускает.</span>
+        <span class="why">Сервис верит, потому что билет выдала касса.</span></li>
+    </ol>
+    <div class="tbl"><table>
+      <tr><th>Термин</th><th>Простыми словами</th></tr>
+      <tr><td><b>KDC</b></td><td>Касса на DC, выдаёт билеты (Key Distribution Center)</td></tr>
+      <tr><td><b>TGT</b></td><td>Главный браслет: билет на получение других билетов</td></tr>
+      <tr><td><code>krbtgt</code></td><td>Учётка, хэшем которой запечатан TGT</td></tr>
+      <tr><td><b>SPN</b></td><td>Имя нужной службы и сервера (Service Principal Name)</td></tr>
+      <tr><td><b>TGS</b></td><td>Билет на конкретный сервис</td></tr>
+    </table></div>
+  </div>
+
+  <div class="blk" data-p="must">
+    <div class="bh"><h3>NetNTLM = загадка на входе</h3><span class="p must">наизусть</span></div>
+    <ol class="steps">
+      <li><span class="lane"><span class="node">Ты</span><span class="arr">→</span><span class="node">Сервер</span></span><span class="what">«Привет, пусти меня».</span><span class="why"></span></li>
+      <li><span class="lane"><span class="node">Сервер</span><span class="arr">→</span><span class="node">Ты</span></span><span class="what">Случайное число-загадка: <b>Challenge</b>.</span><span class="why"></span></li>
+      <li><span class="lane"><span class="node">Ты</span><span class="arr">→</span><span class="node">Сервер</span></span><span class="what">Смешиваешь <b>NTLM-хэш пароля</b> с загадкой и отправляешь <b>Response</b>.</span><span class="why"></span></li>
+      <li><span class="lane"><span class="node">Сервер</span><span class="arr">→</span><span class="node dc">DC</span></span><span class="what">Сам проверить не может: пересылает Challenge и Response.</span><span class="why"></span></li>
+      <li><span class="lane"><span class="node dc">DC</span><span class="arr">→</span><span class="node">Сервер</span></span><span class="what">DC повторяет расчёт со своим хэшем и сравнивает. Совпало = пустить.</span><span class="why"></span></li>
+    </ol>
+    <div class="tip">🎯 Главное для экзамена: при NetNTLM <b>ни пароль, ни его хэш не идут по сети</b>.</div>
+    <p class="small muted">Локальная учётка (не доменная): сервер проверяет сам по своей базе <b>SAM</b>, без DC.</p>
+  </div>
+
+  <div class="quiz">
+    <div class="quiz-h">Проверь себя</div>
+    <div class="q" data-id="k1"><button class="q-ask" aria-expanded="false">Чем TGT отличается от TGS?<small>ответ</small></button><div class="q-ans" hidden><p><b>TGT</b> = главный браслет, на него получают другие билеты. <b>TGS</b> = билет на один конкретный сервис.</p><button class="q-know">Знаю ✓</button></div></div>
+    <div class="q" data-id="k2"><button class="q-ask" aria-expanded="false">Чьим хэшем зашифрован TGT?<small>ответ</small></button><div class="q-ans" hidden><p>Хэшем служебной учётки <code>krbtgt</code>.</p><button class="q-know">Знаю ✓</button></div></div>
+    <div class="q" data-id="k3"><button class="q-ask" aria-expanded="false">Что такое SPN? Пример<small>ответ</small></button><div class="q-ans" hidden><p>Имя службы и сервера, к которому хочешь попасть. Например, <code>MSSQL/SRV</code>.</p><button class="q-know">Знаю ✓</button></div></div>
+    <div class="q" data-id="k4"><button class="q-ask" aria-expanded="false">Передаётся ли пароль по сети при NetNTLM?<small>ответ</small></button><div class="q-ans" hidden><p>Нет. Ни пароль, ни хэш. Идут только загадка (Challenge) и ответ (Response).</p><button class="q-know">Знаю ✓</button></div></div>
+    <div class="q" data-id="k5"><button class="q-ask" aria-expanded="false">Кто проверяет вход по локальной учётке?<small>ответ</small></button><div class="q-ans" hidden><p>Сам сервер, по своей базе <b>SAM</b>. Контроллер домена не участвует.</p><button class="q-know">Знаю ✓</button></div></div>
+  </div>
+</section>
+
+<footer>Собрано из твоего сборника конспектов TryHackMe (12 страниц). Отметки «Знаю» хранятся только в этом браузере.</footer>
+</div>
+
+<script>
+(function(){
+  const KEY="sec1-known", FKEY="sec1-filter";
+  let known=new Set();
+  try{known=new Set(JSON.parse(localStorage.getItem(KEY)||"[]"))}catch(e){}
+  const qs=[...document.querySelectorAll(".q")];
+  const save=()=>{try{localStorage.setItem(KEY,JSON.stringify([...known]))}catch(e){}};
+  function count(){
+    const vis=qs.filter(q=>q.offsetParent!==null);
+    const n=vis.filter(q=>known.has(q.dataset.id)).length;
+    document.getElementById("kn").textContent=n;
+    document.getElementById("kt").textContent=vis.length;
+    document.getElementById("km").style.width=(vis.length?n/vis.length*100:0)+"%";
+  }
+  qs.forEach(q=>{
+    const ask=q.querySelector(".q-ask"),ans=q.querySelector(".q-ans"),kb=q.querySelector(".q-know"),lab=ask.querySelector("small");
+    const paint=()=>{const k=known.has(q.dataset.id);q.classList.toggle("known",k);kb.textContent=k?"Знаю ✓":"Отметить: знаю";if(ans.hidden)lab.textContent=k?"знаю ✓":"ответ";};
+    ask.addEventListener("click",()=>{ans.hidden=!ans.hidden;ask.setAttribute("aria-expanded",String(!ans.hidden));lab.textContent=ans.hidden?(known.has(q.dataset.id)?"знаю ✓":"ответ"):"скрыть";});
+    kb.addEventListener("click",()=>{const id=q.dataset.id;known.has(id)?known.delete(id):known.add(id);save();paint();count();});
+    paint();
+  });
+  const fa=document.getElementById("fAll"),fm=document.getElementById("fMust");
+  function setF(m){document.body.classList.toggle("only-must",m);fa.setAttribute("aria-pressed",String(!m));fm.setAttribute("aria-pressed",String(m));try{localStorage.setItem(FKEY,m?"1":"0")}catch(e){}count();}
+  fa.addEventListener("click",()=>setF(false));fm.addEventListener("click",()=>setF(true));
+  let f0=false;try{f0=localStorage.getItem(FKEY)==="1"}catch(e){}
+  setF(f0);
+  // активная тема в оглавлении
+  const links=[...document.querySelectorAll(".toc a")];
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id));const on=links.find(a=>a.classList.contains("on")),ol=document.querySelector(".toc ol");if(on&&ol.scrollWidth>ol.clientWidth)ol.scrollTo({left:on.parentElement.offsetLeft-(ol.clientWidth-on.offsetWidth)/2,behavior:"smooth"});}})},{rootMargin:"-30% 0px -60% 0px"});
+  document.querySelectorAll("section").forEach(s=>io.observe(s));
+})();
+</script>
+
+</body>
+</html>
